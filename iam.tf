@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "eks-cluster-role-policy-json" {
 resource "aws_iam_role" "eks-cluster-role" {
   name               = "${local.env}-${local.project}-eks-cluster-role"
   assume_role_policy = data.aws_iam_policy_document.eks-cluster-role-policy-json.json
-  tags               = merge(merge(map("Name", "${local.env}-${local.project}-eks-cluster-role"), map("ResourceType", "IAM"),), local.common_tags)
+  tags               = merge(merge(tomap("Name", "${local.env}-${local.project}-eks-cluster-role"), tomap("ResourceType", "IAM"),), local.common_tags)
 }
 
 resource "aws_iam_instance_profile" "eks-cluster-iamrole-instances-profile" {
