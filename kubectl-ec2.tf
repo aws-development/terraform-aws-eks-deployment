@@ -39,7 +39,7 @@ resource "aws_security_group" "kubectl_sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "tcp"
-    cidr_blocks = [module.vpc_eks.cidr]
+    cidr_blocks = [var.vpc_cidr]
   }
 
   egress {
