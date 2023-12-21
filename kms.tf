@@ -1,7 +1,8 @@
-resource "aws_kms_key" "aws_eks_kms_key" {
-  description             = "KMS key for EKS encryption"
-  enable_key_rotation     = true
-  deletion_window_in_days = 7
+module "eks_cluster" {
+  source  = "native-cube/kms/aws"
+  version = "~> 1.0.0"
 
-  tags = merge(tomap({ "Name" = join("-", [local.env, local.project, "eks-kms-key"]) }), tomap({ "ResourceType" = "KMS" }), local.common_tags, )
+  alias_name = var.name_prefix
+
+  policy = data.aws_iam_policy_document.kms_policy_cluster.json
 }
