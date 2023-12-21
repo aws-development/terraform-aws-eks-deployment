@@ -24,16 +24,16 @@ resource "aws_launch_template" "launch_template" {
   vpc_security_group_ids               = [aws_security_group.eks-cluster-sg.id]
   user_data                            = base64encode(local.eks_worker_node_userdata)
   #tags                                 = merge(tomap("Name", "${local.env}-${local.project}-launch-template"), tomap("ResourceType", "LAUNCHTEMPLATE"), local.common_tags)
-  tags = merge(tomap("Name", "${local.env}-${local.project}-launch-template"), tomap("ResourceType", "LAUNCHTEMPLATE"), local.common_tags , )
+  tags = merge(tomap({ "Name" = "${local.env}-${local.project}-launch-template" }), tomap({ "ResourceType" = "LAUNCHTEMPLATE" }), local.common_tags, )
   tag_specifications {
     resource_type = "instance"
-    tags = merge(tomap("Name", "${local.env}-${local.project}-eks-worker-node"), tomap("ResourceType", "EC2"), local.common_tags, tomap("k8s.io/cluster-autoscaler/${local.env}-${local.project}-eks-cluster", "owned"),tomap("kubernetes.io/cluster/${local.env}-${local.project}-eks-cluster", "owned"),)
+    tags          = merge(tomap({ "Name" = "${local.env}-${local.project}-eks-worker-node" }), tomap({ "ResourceType" = "EC2" }), local.common_tags, tomap({ "k8s.io/cluster-autoscaler/${local.env}-${local.project}-eks-cluster" = "owned" }), tomap({ "kubernetes.io/cluster/${local.env}-${local.project}-eks-cluster" = "owned" }), )
     #tags          = merge(tomap("Name", "${local.env}-${local.project}-eks-worker-node"), tomap("ResourceType", "EC2"), local.common_tags, tomap("k8s.io/cluster-autoscaler/${local.env}-${local.project}-eks-cluster", "owned"), tomap("kubernetes.io/cluster/${local.env}-${local.project}-eks-cluster", "owned"))
   }
   tag_specifications {
     resource_type = "volume"
     #tags          = merge(tomap("Name", "${local.env}-${local.project}-eks-worker-node-volume"), tomap("ResourceType", "EBS"), local.common_tags)
-    tags = merge(tomap("Name", "${local.env}-${local.project}-eks-worker-node-volume"), tomap("ResourceType", "EBS"), local.common_tags , )
+    tags = merge(tomap({ "Name" = "${local.env}-${local.project}-eks-worker-node-volume" }), tomap({ "ResourceType" = "EBS" }), local.common_tags, )
 
   }
   //  lifecycle {
@@ -45,7 +45,7 @@ resource "aws_key_pair" "workernode_key_pair" {
   key_name   = "${local.env}-${local.project}-eks-worker-node-keypair"
   public_key = local.eks_worker_node_keypair
 
-  tags = merge(tomap("Name", "${local.env}-${local.project}-eks-worker-node-keypair"), tomap("ResourceType", "KEYPAIR"), local.common_tags ,)
+  tags = merge(tomap({ "Name" = "${local.env}-${local.project}-eks-worker-node-keypair" }), tomap({ "ResourceType" = "KEYPAIR" }), local.common_tags, )
 
   //  lifecycle {
   //    prevent_destroy = true

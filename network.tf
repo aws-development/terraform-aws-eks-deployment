@@ -3,7 +3,7 @@ resource "aws_vpc" "vpc" {
   instance_tenancy     = "default"
   enable_dns_hostnames = true
   enable_dns_support   = true
-  tags                 = merge(tomap("Name", join("-", [local.env, local.project, "vpc"])), tomap("ResourceType", "VPC"), local.common_tags,)
+  tags                 = merge(tomap({ "Name" = join("-", [local.env, local.project, "vpc"]) }), tomap({ "ResourceType" = "VPC" }), local.common_tags, )
   //  lifecycle {
   //    prevent_destroy = true
   //  }
@@ -23,42 +23,42 @@ resource "aws_internet_gateway" "igw" {
 resource "aws_subnet" "public-subnet-1a" {
   cidr_block        = local.public_subnet_1a
   vpc_id            = aws_vpc.vpc.id
-  tags              = merge(tomap("Name", join("-", [local.env, local.project, "public-subnet-1a"])), tomap("ResourceType", "SUBNET"), local.common_tags)
+  tags              = merge(tomap({ "Name" = join("-", [local.env, local.project, "public-subnet-1a"]) }), tomap({ "ResourceType" = "SUBNET" }), local.common_tags, )
   availability_zone = "ap-southeast-1a"
 }
 
 resource "aws_subnet" "public-subnet-1b" {
   cidr_block        = local.public_subnet_1b
   vpc_id            = aws_vpc.vpc.id
-  tags              = merge(tomap("Name", join("-", [local.env, local.project, "public-subnet-1b"])), tomap("ResourceType", "SUBNET"), local.common_tags)
+  tags              = merge(tomap({ "Name" = join("-", [local.env, local.project, "public-subnet-1b"]) }), tomap({ "ResourceType" = "SUBNET" }), local.common_tags, )
   availability_zone = "ap-southeast-1b"
 }
 
 resource "aws_subnet" "public-subnet-1c" {
   cidr_block        = local.public_subnet_1c
   vpc_id            = aws_vpc.vpc.id
-  tags              = merge(tomap("Name", join("-", [local.env, local.project, "public-subnet-1c"])), tomap("ResourceType", "SUBNET"), local.common_tags)
+  tags              = merge(tomap({ "Name" = join("-", [local.env, local.project, "public-subnet-1c"]) }), tomap({ "ResourceType" = "SUBNET" }), local.common_tags, )
   availability_zone = "ap-southeast-1c"
 }
 
 resource "aws_subnet" "private-subnet-1a" {
   cidr_block        = local.private_subnet_1a
   vpc_id            = aws_vpc.vpc.id
-  tags              = merge(tomap("Name", join("-", [local.env, local.project, "private-subnet-1a"])), tomap("ResourceType", "SUBNET"), tomap("kubernetes.io/cluster/${local.env}-${local.project}-eks-cluster", "shared"), local.common_tags)
+  tags              = merge(tomap({ "Name" = join("-", [local.env, local.project, "private-subnet-1a"]) }), tomap({ "ResourceType" = "SUBNET" }), tomap({ "kubernetes.io/cluster/${local.env}-${local.project}-eks-cluster" = "shared" }), local.common_tags, )
   availability_zone = "ap-southeast-1a"
 }
 
 resource "aws_subnet" "private-subnet-1b" {
   cidr_block        = local.private_subnet_1b
   vpc_id            = aws_vpc.vpc.id
-  tags              = merge(tomap("Name", join("-", [local.env, local.project, "private-subnet-1b"])), tomap("ResourceType", "SUBNET"), tomap("kubernetes.io/cluster/${local.env}-${local.project}-eks-cluster", "shared"), local.common_tags)
+  tags              = merge(tomap({ "Name" = join("-", [local.env, local.project, "private-subnet-1b"]) }), tomap({ "ResourceType" = "SUBNET" }), tomap({ "kubernetes.io/cluster/${local.env}-${local.project}-eks-cluster" = "shared" }), local.common_tags, )
   availability_zone = "ap-southeast-1b"
 }
 
 resource "aws_subnet" "private-subnet-1c" {
   cidr_block        = local.private_subnet_1c
   vpc_id            = aws_vpc.vpc.id
-  tags              = merge(tomap("Name", join("-", [local.env, local.project, "private-subnet-1c"])), tomap("ResourceType", "SUBNET"), tomap("kubernetes.io/cluster/${local.env}-${local.project}-eks-cluster", "shared"), local.common_tags)
+  tags              = merge(tomap({ "Name" = join("-", [local.env, local.project, "private-subnet-1c"]) }), tomap({ "ResourceType" = "SUBNET" }), tomap({ "kubernetes.io/cluster/${local.env}-${local.project}-eks-cluster" = "shared" }), local.common_tags, )
   availability_zone = "ap-southeast-1c"
 }
 
@@ -68,7 +68,7 @@ resource "aws_security_group" "eks-cluster-sg" {
   name        = "${local.env}-${local.project}-eks-cluster-sg"
   description = "Security Group For EKS Cluster Mangement"
   vpc_id      = aws_vpc.vpc.id
-  tags        = merge(tomap("Name", join("-", [local.env, local.project, "eks-cluster-sg"])), tomap("ResourceType", "SECURITYGROUP"), local.common_tags)
+  tags        = merge(tomap({ "Name" = join("-", [local.env, local.project, "eks-cluster-sg"]) }), tomap({ "ResourceType" = "SECURITYGROUP" }), local.common_tags, )
 
   ingress {
     from_port   = 443
@@ -95,7 +95,7 @@ resource "aws_security_group" "eks-worker-node-sg" {
   name        = "${local.env}-${local.project}-eks-worker-node-sg"
   description = "EKS worker node security group"
   vpc_id      = aws_vpc.vpc.id
-  tags        = merge(tomap("Name", join("-", [local.env, local.project, "eks-worker-node-sg"])), tomap("ResourceType", "SECURITYGROUP"), local.common_tags)
+  tags        = merge(tomap({ "Name" = join("-", [local.env, local.project, "eks-worker-node-sg"]) }), tomap({ "ResourceType" = "SECURITYGROUP" }), local.common_tags, )
 
   ingress {
     from_port   = 0
@@ -132,7 +132,7 @@ resource "aws_security_group" "eks-worker-node-sg" {
 resource "aws_nat_gateway" "natgw" {
   allocation_id = aws_eip.eip.id
   subnet_id     = aws_subnet.public-subnet-1a.id
-  tags          = merge(tomap("Name", "${local.env}-${local.project}-natgw"), tomap("ResourceType", "NATGW"), local.common_tags)
+  tags          = merge(tomap({ "Name" = "${local.env}-${local.project}-natgw" }), tomap({ "ResourceType" = "NATGW" }), local.common_tags, )
   //  lifecycle {
   //    prevent_destroy = true
   //  }
@@ -141,7 +141,7 @@ resource "aws_nat_gateway" "natgw" {
 # elastic IP for natgw
 resource "aws_eip" "eip" {
   vpc  = true
-  tags = merge(tomap("Name", "${local.env}-${local.project}-natgw-eip"), tomap("ResourceType", "EIP"), local.common_tags)
+  tags = merge(tomap({ "Name" = "${local.env}-${local.project}-natgw-eip" }), tomap({ "ResourceType" = "EIP" }), local.common_tags, )
   //  lifecycle {
   //    prevent_destroy = true
   //  }
@@ -151,7 +151,7 @@ resource "aws_eip" "eip" {
 
 resource "aws_route_table" "public-route-table" {
   vpc_id = aws_vpc.vpc.id
-  tags   = merge(tomap("Name", "${local.env}-${local.project}-public-route-table"), tomap("ResourceType", "PublicRouteTable"), local.common_tags)
+  tags   = merge(tomap({ "Name" = "${local.env}-${local.project}-public-route-table" }), tomap({ "ResourceType" = "PublicRouteTable" }), local.common_tags, )
   //  lifecycle {
   //    prevent_destroy = true
   //  }
@@ -159,7 +159,7 @@ resource "aws_route_table" "public-route-table" {
 
 resource "aws_route_table" "private-route-table" {
   vpc_id = aws_vpc.vpc.id
-  tags   = merge(tomap("Name", "${local.env}-${local.project}-private-route-table"), tomap("ResourceType", "PrivateRouteTable"), local.common_tags)
+  tags   = merge(tomap({ "Name" = "${local.env}-${local.project}-private-route-table" }), tomap({ "ResourceType" = "PrivateRouteTable" }), local.common_tags, )
   //  lifecycle {
   //    prevent_destroy = true
   //  }

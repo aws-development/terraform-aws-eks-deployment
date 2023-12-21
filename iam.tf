@@ -51,7 +51,7 @@ resource "aws_iam_role" "eks-worker-role" {
   name               = "${local.env}-${local.project}-eks-worker-role"
   assume_role_policy = data.aws_iam_policy_document.eks-worker-role-policy-json.json
   #tags               = merge(merge(map("Name", "${local.env}-${local.project}-eks-worker-role"), map("ResourceType", "IAM"), ), local.common_tags)
-  tags = merge(tomap("Name", "${local.env}-${local.project}-eks-worker-role"), tomap("ResourceType", "IAM"), local.common_tags, )
+  tags = merge(tomap({ "Name" = "${local.env}-${local.project}-eks-worker-role" }), tomap({ "ResourceType" = "IAM" }), local.common_tags, )
 }
 
 resource "aws_iam_instance_profile" "eks-worker-iamrole-instances-profile" {
