@@ -37,7 +37,7 @@ resource "aws_launch_template" "launch_template" {
   //  }
 }
 
-resource "aws_key_pair" "workernode_key_pair" {s
+resource "aws_key_pair" "workernode_key_pair" {
   key_name   = "${local.env}-${local.project}-eks-worker-node-keypair"
   public_key = local.eks_worker_node_keypair
 
