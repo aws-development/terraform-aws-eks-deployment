@@ -30,7 +30,7 @@ resource "aws_eks_cluster" "cluster" {
 }
 
 resource "aws_cloudwatch_log_group" "cluster" {
-  name              = "/aws/eks/${var.name_prefix}/cluster"
+  name              = "/aws/eks/${var.name_prefix}-cluster/cluster"
   retention_in_days = 7
 
   kms_key_id = module.kms_eks_cluster.key_arn
