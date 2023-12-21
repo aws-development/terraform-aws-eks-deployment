@@ -33,11 +33,15 @@ amazon-linux-extras install collectd
 echo "collectd agent installed"
 
 #install kubectl binary
-
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.28.3/2023-11-14/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
-
+#install helm
+sudo yum install openssl
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh
+chmod 700 get_helm.sh
+./get_helm.sh
+helm version | cut -d + -f 1
 aws eks update-kubeconfig --region '${var.REGION}' --name '${aws_eks_cluster.cluster.name}
 USERDATA
     prod = <<USERDATA
@@ -61,11 +65,15 @@ amazon-linux-extras install collectd
 echo "collectd agent installed"
 
 #install kubectl binary
-
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.28.3/2023-11-14/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
-
+#install helm
+sudo yum install openssl
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh
+chmod 700 get_helm.sh
+./get_helm.sh
+helm version | cut -d + -f 1
 aws eks update-kubeconfig --region '${var.REGION}' --name '${aws_eks_cluster.cluster.name}
 USERDATA
     dev  = <<USERDATA
@@ -94,13 +102,16 @@ curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.28.3/2023-11-14/bin/linu
 chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
 
+#install helm
+sudo yum install openssl
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh
+chmod 700 get_helm.sh
+./get_helm.sh
+helm version | cut -d + -f 1
 aws eks update-kubeconfig --region '${var.REGION}' --name '${aws_eks_cluster.cluster.name}
-
 USERDATA
   }
   eks_kubectl_node_userdata = local.tf_eks_kubectl_node_userdata[var.env]
-
-
 
   eks_dns_cluster_ip = cidrhost(var.eks_service_ipv4_cidr, 10) # set to X.X.X.10 for CoreDNS service
 
