@@ -18,13 +18,13 @@ provider "aws" {
 
   default_tags {
     tags = {
-      env         = var.env
-      provider    = var.tf_provider
-      platform    = var.platform
-      application = var.application
-      cost-center = var.cost_center
-      owner       = var.owner
-      lob         = var.lob
+      default_env   = var.env
+      provider      = var.tf_provider
+      platform      = var.platform
+      application   = var.application
+      cost-center   = var.cost_center
+      default_owner = var.owner
+      lob           = var.lob
     }
   }
 }
