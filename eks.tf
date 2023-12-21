@@ -9,5 +9,12 @@ resource "aws_eks_cluster" "eks" {
   enabled_cluster_log_types = ["api", "audit"]
   role_arn                  = aws_iam_role.eks-cluster-role.arn
   version                   = local.k8_version
-  tags                      = tomap(merge(map("Name", join("-", [local.env, local.project, "eks-cluster"])), map("ResourceType", "EKS"), local.common_tags))
+  tags = merge(
+    merge(
+      map("Name", "${local.env}-${local.project}-eks-cluster-role"),
+      map("ResourceType", "IAM"),
+    ),
+    local.common_tags
+  )
+  #tags                      = tomap(merge(map("Name", join("-", [local.env, local.project, "eks-cluster"])), map("ResourceType", "EKS"), local.common_tags))
 }
