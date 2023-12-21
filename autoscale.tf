@@ -11,7 +11,7 @@ resource "aws_autoscaling_group" "asg" {
   termination_policies      = ["OldestInstance", "OldestLaunchTemplate"]
   vpc_zone_identifier       = [aws_subnet.private-subnet-1a.id, aws_subnet.private-subnet-1b.id, aws_subnet.private-subnet-1c.id]
   enabled_metrics           = ["GroupMinSize", "GroupMaxSize", "GroupDesiredCapacity", "GroupInServiceInstances", "GroupPendingInstances", "GroupStandbyInstances", "GroupTerminatingInstances", "GroupTotalInstances"]
-  tags = merge(
+  tag = merge(
     tomap({
       key                 = "Environment"
       value               = local.env
