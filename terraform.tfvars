@@ -1,4 +1,4 @@
-name_prefix = "eks-eu-dev"
+name_prefix = "wiz-eks-ap-dev-poc"
 
 vpc_cidr              = "10.100.0.0/16"
 private_subnets_cidrs = ["10.100.0.0/18", "10.100.64.0/18", "10.100.128.0/18"]

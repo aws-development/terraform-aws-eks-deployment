@@ -2,7 +2,7 @@
 # EKS Cluster
 #####
 resource "aws_eks_cluster" "cluster" {
-  name = var.name_prefix
+  name = "${var.name_prefix}-cluster"
 
   version  = var.eks_version
   role_arn = aws_iam_role.cluster.arn
@@ -45,6 +45,7 @@ resource "aws_iam_role" "cluster" {
     "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
     "arn:aws:iam::aws:policy/AmazonEKSServicePolicy",
     "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
+
   ]
 }
 
