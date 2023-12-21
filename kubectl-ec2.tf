@@ -26,7 +26,7 @@ resource "aws_security_group" "kubectl_sg" {
   depends_on  = [aws_eks_cluster.cluster]
   name_prefix = "kubectl_sg"
   description = "kubectl security group"
-  vpc_id      = module.vpc_eks.id
+  vpc_id      = module.vpc_eks.vpc_id
 
   ingress {
     from_port   = 22
@@ -39,7 +39,7 @@ resource "aws_security_group" "kubectl_sg" {
     from_port   = 0
     to_port     = 0
     protocol    = "tcp"
-    cidr_blocks = [module.vpc_eks.cidr_block]
+    cidr_blocks = [module.vpc_eks.cidr]
   }
 
   egress {
