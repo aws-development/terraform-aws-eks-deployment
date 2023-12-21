@@ -12,5 +12,5 @@ resource "aws_eks_cluster" "eks" {
   #tags                      = merge(merge(map("Name", "${local.env}-${local.project}-eks-cluster"),map("ResourceType", "EKS"),),local.common_tags)
 
   #tags                      = tomap(merge(map("Name", join("-", [local.env, local.project, "eks-cluster"])), map("ResourceType", "EKS"), local.common_tags))
-  tags = merge(tomap("Name" ="${local.env}-${local.project}-eks-cluster"),tomap("ResourceType"= "EKS"),local.common_tags,)
+  tags = merge(tomap("Name", "${local.env}-${local.project}-eks-cluster"), tomap("ResourceType", "EKS"), local.common_tags, )
 }
