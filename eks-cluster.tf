@@ -20,7 +20,7 @@ resource "aws_eks_cluster" "cluster" {
   encryption_config {
     resources = ["secrets"]
     provider {
-      key_arn = module.eks_cluster.key_arn
+      key_arn = module.kms_eks_cluster.key_arn
     }
   }
 
@@ -33,7 +33,7 @@ resource "aws_cloudwatch_log_group" "cluster" {
   name              = "/aws/eks/${var.name_prefix}/cluster"
   retention_in_days = 7
 
-  kms_key_id = module.eks_cluster.key_arn
+  kms_key_id = module.kms_eks_cluster.key_arn
 }
 
 resource "aws_iam_role" "cluster" {
