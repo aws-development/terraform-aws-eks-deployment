@@ -15,7 +15,10 @@ resource "aws_eks_cluster" "eks" {
   tags = merge(tomap({ "Name" = join("-", [local.env, local.project, "eks-cluster"]) }), tomap({ "ResourceType" = "EKS" }), local.common_tags, )
 
   encryption_config {
-    provider_key_arn = aws_kms_key.aws_eks_kms_key.arn
+    provider {
+      key_arn = aws_kms_key.aws_eks_kms_key.arn
+    }
+    resources = ["secrets"]
   }
 }
 
@@ -46,8 +49,5 @@ resource "aws_eks_node_group" "example" {
   }
   tags = merge(tomap({ "Name" = join("-", [local.env, local.project, "eks-cluster-ng"]) }), tomap({ "ResourceType" = "EKS-NODE-GROUP" }), local.common_tags, )
 
-  encryption_config {
-    provider_key_arn = aws_kms_key.aws_eks_kms_key.arn
-  }
 
 }
