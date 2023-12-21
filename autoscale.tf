@@ -11,28 +11,27 @@ resource "aws_autoscaling_group" "asg" {
   termination_policies      = ["OldestInstance", "OldestLaunchTemplate"]
   vpc_zone_identifier       = [aws_subnet.private-subnet-1a.id, aws_subnet.private-subnet-1b.id, aws_subnet.private-subnet-1c.id]
   enabled_metrics           = ["GroupMinSize", "GroupMaxSize", "GroupDesiredCapacity", "GroupInServiceInstances", "GroupPendingInstances", "GroupStandbyInstances", "GroupTerminatingInstances", "GroupTotalInstances"]
-  tags = [
-    {
+  tags = merge(
+    tomap({
       key                 = "Environment"
       value               = local.env
       propagate_at_launch = false
-    },
-    {
+    }),
+    tomap({
       key                 = "Project"
       value               = local.project
       propagate_at_launch = false
-    },
-    {
+    }),
+    tomap({
       key                 = "k8s.io/cluster-autoscaler/${local.env}-${local.project}-eks-cluster"
       value               = "owned"
       propagate_at_launch = true
-    },
-    {
+    }),
+    tomap({
       key                 = "k8s.io/cluster-autoscaler/enabled"
       value               = "true"
       propagate_at_launch = true
-    }
-  ]
+    }),)
   mixed_instances_policy {
     launch_template {
       launch_template_specification {
@@ -60,4 +59,3 @@ resource "aws_autoscaling_group" "asg" {
     create_before_destroy = true
   }
 }
-

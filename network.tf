@@ -12,7 +12,7 @@ resource "aws_vpc" "vpc" {
 ################## Internet Gateway ######################
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
-  tags   = merge(tomap("Name", "${local.env}-${local.project}-igw"), tomap("ResourceType", "IGW"), local.common_tags)
+  tags   = merge(tomap({"Name"= "${local.env}-${local.project}-igw"}), tomap({"ResourceType"= "IGW"}), local.common_tags,)
   //  lifecycle {
   //    prevent_destroy = true
   //  }
