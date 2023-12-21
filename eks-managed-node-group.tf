@@ -12,7 +12,7 @@ resource "aws_key_pair" "workernode_key_pair" {
   key_name   = "${var.env}-${var.project}-eks-worker-node-keypair"
   public_key = local.eks_worker_node_keypair
 
-  tags = merge(tomap({ "Name" = "${local.env}-${local.project}-eks-worker-node-keypair" }), tomap({ "ResourceType" = "KEYPAIR" }), )
+  tags = merge(tomap({ "Name" = "${var.env}-${var.project}-eks-worker-node-keypair" }), tomap({ "ResourceType" = "KEYPAIR" }), )
 
 }
 

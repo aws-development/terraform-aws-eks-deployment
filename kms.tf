@@ -1,4 +1,4 @@
-module "eks_cluster" {
+module "kms_eks_cluster" {
   source  = "native-cube/kms/aws"
   version = "~> 1.0.0"
 
