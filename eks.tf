@@ -6,13 +6,25 @@ resource "aws_eks_cluster" "eks" {
     endpoint_private_access = true
     endpoint_public_access  = false
   }
-  enabled_cluster_log_types = ["api", "audit"]
+  enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler", ]
   role_arn                  = aws_iam_role.eks-cluster-role.arn
   version                   = local.k8_version
   #tags                      = merge(merge(map("Name", "${local.env}-${local.project}-eks-cluster"),map("ResourceType", "EKS"),),local.common_tags)
 
   #tags                      = tomap(merge(map("Name", join("-", [local.env, local.project, "eks-cluster"])), map("ResourceType", "EKS"), local.common_tags))
   tags = merge(tomap({ "Name" = join("-", [local.env, local.project, "eks-cluster"]) }), tomap({ "ResourceType" = "EKS" }), local.common_tags, )
+
+  encryption_config {
+    provider_key_arn = aws_kms_key.aws_eks_kms_key.arn
+  }
+}
+
+resource "aws_eks_addon" "eks_addons" {
+  for_each = var.eks_addons
+
+  cluster_name  = aws_eks_cluster.eks.name
+  addon_name    = each.key
+  addon_version = each.value
 }
 
 
@@ -32,4 +44,10 @@ resource "aws_eks_node_group" "example" {
     max_size     = 3
     min_size     = 1
   }
+  tags = merge(tomap({ "Name" = join("-", [local.env, local.project, "eks-cluster-ng"]) }), tomap({ "ResourceType" = "EKS-NODE-GROUP" }), local.common_tags, )
+
+  encryption_config {
+    provider_key_arn = aws_kms_key.aws_eks_kms_key.arn
+  }
+
 }

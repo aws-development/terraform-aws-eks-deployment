@@ -93,3 +93,12 @@ variable "spot_allocation_strategy" {
   default     = "lowest-price"
   description = "spot_allocation_strategy"
 }
+
+variable "eks_addons" {
+  type = map(any)
+  default = {
+    "vpc-cni"    = "latest"
+    "kube-proxy" = "latest"
+    # Add more addons as needed
+  }
+}

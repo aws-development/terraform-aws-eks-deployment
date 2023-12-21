@@ -15,6 +15,8 @@ resource "aws_launch_template" "launch_template" {
       volume_type = "gp3"
       throughput  = 125
       iops        = 3000
+      encrypted   = true
+      kms_key_id  = aws_kms_key.aws_eks_kms_key.arn
     }
   }
   image_id                             = data.aws_ssm_parameter.eks-ami-128.value
