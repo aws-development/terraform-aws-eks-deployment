@@ -21,7 +21,7 @@ resource "aws_eks_cluster" "eks" {
     resources = ["secrets"]
   }
 }
-
+/*
 resource "aws_eks_addon" "eks_addons" {
   for_each = var.eks_addons
 
@@ -30,7 +30,7 @@ resource "aws_eks_addon" "eks_addons" {
   addon_version = each.value
   resolve_conflicts_on_update = "PRESERVE"
 }
-
+*/
 
 resource "aws_eks_node_group" "example" {
   cluster_name    = aws_eks_cluster.eks.name
