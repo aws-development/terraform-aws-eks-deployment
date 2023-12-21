@@ -140,7 +140,7 @@ resource "aws_nat_gateway" "natgw" {
 
 # elastic IP for natgw
 resource "aws_eip" "eip" {
-  vpc  = true
+  domain  = "vpc"
   tags = merge(tomap({ "Name" = "${local.env}-${local.project}-natgw-eip" }), tomap({ "ResourceType" = "EIP" }), local.common_tags, )
   //  lifecycle {
   //    prevent_destroy = true

@@ -8,50 +8,50 @@ locals {
     Project     = local.project
   }
   tf_vpc_ipblock = {
-    uat  = "10.145.0.0/16"
+    dev  = "10.145.0.0/16"
     prod = "10.145.16.0/16"
-    dev  = "10.145.32.0/16"
+    uat  = "10.145.32.0/16"
   }
   vpc_ipblock = local.tf_vpc_ipblock[local.env]
 
   tf_public_subnet_1a = {
-    uat  = "10.145.0.0/24"
+    dev  = "10.145.0.0/24"
     prod = "10.145.16.0/24"
-    dev  = "10.145.32.0/24"
+    uat  = "10.145.32.0/24"
   }
   public_subnet_1a = local.tf_public_subnet_1a[local.env]
 
   tf_public_subnet_1b = {
-    uat  = "10.145.1.0/24"
+    dev  = "10.145.1.0/24"
     prod = "10.145.17.0/24"
-    dev  = "10.145.33.0/24"
+    uat  = "10.145.33.0/24"
   }
 
   public_subnet_1b = local.tf_public_subnet_1b[local.env]
 
   tf_public_subnet_1c = {
-    uat  = "10.145.2.0/24"
+    dev  = "10.145.2.0/24"
     prod = "10.145.18.0/24"
-    dev  = "10.145.34.0/24"
+    uat  = "10.145.34.0/24"
   }
   public_subnet_1c = local.tf_public_subnet_1c[local.env]
 
   tf_private_subnet_1a = {
-    uat  = "10.145.4.0/24"
+    dev  = "10.145.4.0/24"
     prod = "10.145.20.0/24"
-    dev  = "10.145.36.0/24"
+    uat  = "10.145.36.0/24"
   }
   private_subnet_1a = local.tf_private_subnet_1a[local.env]
   tf_private_subnet_1b = {
-    uat  = "10.145.5.0/24"
+    dev  = "10.145.5.0/24"
     prod = "10.145.21.0/24"
-    dev  = "10.145.37.0/24"
+    uat  = "10.145.37.0/24"
   }
   private_subnet_1b = local.tf_private_subnet_1b[local.env]
   tf_private_subnet_1c = {
-    uat  = "10.145.6.0/24"
+    dev  = "10.145.6.0/24"
     prod = "10.145.22.0/24"
-    dev  = "10.145.38.0/24"
+    uat  = "10.145.38.0/24"
   }
   private_subnet_1c = local.tf_private_subnet_1c[local.env]
 
@@ -135,9 +135,9 @@ USERDATA
   }
   spot_allocation_strategy = local.tf_spot_allocation_strategy[local.env]
   tf_on_demand_percentage_above_base_capacity = {
-    uat  = "0"
+    dev  = "0"
     prod = "60"
-    dev  = "60"
+    uat  = "60"
   }
   on_demand_percentage_above_base_capacity = local.tf_on_demand_percentage_above_base_capacity[local.env]
 
