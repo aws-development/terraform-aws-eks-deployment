@@ -14,3 +14,22 @@ resource "aws_eks_cluster" "eks" {
   #tags                      = tomap(merge(map("Name", join("-", [local.env, local.project, "eks-cluster"])), map("ResourceType", "EKS"), local.common_tags))
   tags = merge(tomap({ "Name" = join("-", [local.env, local.project, "eks-cluster"]) }), tomap({ "ResourceType" = "EKS" }), local.common_tags, )
 }
+
+
+resource "aws_eks_node_group" "example" {
+  cluster_name    = aws_eks_cluster.eks.name
+  node_group_name = local.eks_node_group_name
+  node_role_arn   = aws_iam_role.eks-worker-role.arn
+  subnet_ids      = [aws_subnet.private-subnet-1a.id, aws_subnet.private-subnet-1b.id, aws_subnet.private-subnet-1c.id]
+
+  launch_template {
+    id      = aws_launch_template.launch_template.id
+    version = "$Latest"
+  }
+
+  scaling_config {
+    desired_size = 2
+    max_size     = 3
+    min_size     = 1
+  }
+}

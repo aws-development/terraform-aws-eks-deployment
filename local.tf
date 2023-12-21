@@ -63,6 +63,9 @@ locals {
     prod = var.eks_cluster_version
     dev  = var.eks_cluster_version
   }
+  eks_node_group_name = "${local.env}_${local.project}_eks_cluster_ng"
+
+
   k8_version = local.tf_k8_version[local.env]
 
   tf_eks_worker_node_instance_type = {
