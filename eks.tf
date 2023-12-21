@@ -28,6 +28,7 @@ resource "aws_eks_addon" "eks_addons" {
   cluster_name  = aws_eks_cluster.eks.name
   addon_name    = each.key
   addon_version = each.value
+  resolve_conflicts_on_update = "PRESERVE"
 }
 
 

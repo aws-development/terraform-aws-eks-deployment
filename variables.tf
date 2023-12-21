@@ -97,8 +97,8 @@ variable "spot_allocation_strategy" {
 variable "eks_addons" {
   type = map(any)
   default = {
-    "vpc-cni"    = "latest"
-    "kube-proxy" = "latest"
+    "vpc-cni"    = "*"
+    "kube-proxy" = "*"
     # Add more addons as needed
   }
 }
