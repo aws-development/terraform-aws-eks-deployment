@@ -112,6 +112,11 @@ resource "aws_iam_role_policy_attachment" "kubectl_ssm_role_attachment" {
   role = aws_iam_role.kubectl_ssm_role.name
 }
 
+resource "aws_iam_role_policy_attachment" "kubectl_eks_role_attachment" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+  #policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonSSMManagedInstanceCore"
+  role = aws_iam_role.kubectl_ssm_role.name
+}
 
 resource "aws_ssm_association" "kubectl_ssm_association" {
   name = "AWS-UpdateSSMAgent"
