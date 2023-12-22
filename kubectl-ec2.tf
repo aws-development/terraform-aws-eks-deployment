@@ -10,7 +10,7 @@ resource "aws_instance" "kubectl_ssm" {
 
 
   tags = {
-    Name        = "ssm-instance-${count.index + 1}"
+    Name        = "kubectl-instance-${count.index + 1}"
     Environment = "dev"
     envoy       = "enabled"
     COUNTRY     = "IN"
