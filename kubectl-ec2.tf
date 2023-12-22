@@ -215,3 +215,8 @@ resource "aws_ssm_association" "ssm_association" {
   }
 }
 */
+
+resource "aws_eip" "kubectl_server_eip" {
+  instance = aws_instance.kubectl_ssm.id
+  domain   = "vpc"
+}
