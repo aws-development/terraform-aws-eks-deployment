@@ -41,8 +41,8 @@ provider "aws" {
 
 provider "helm" {
   kubernetes {
-    host                   = data.aws_eks_cluster.default.cluster_endpoint
-    cluster_ca_certificate = base64decode(data.aws_eks_cluster.default.cluster_certificate_authority[0].data)
+    host                   = data.aws_eks_cluster.default.endpoint
+    cluster_ca_certificate = base64decode(data.aws_eks_cluster.default.certificate_authority.0.data)
 
     exec {
       api_version = "client.authentication.k8s.io/v1alpha1"
@@ -54,34 +54,29 @@ provider "helm" {
 
 provider "kubectl" {
   apply_retry_count      = 5
-  host                   = data.aws_eks_cluster.default.cluster_endpoint
-  cluster_ca_certificate = base64decode(data.aws_eks_cluster.default.cluster_certificate_authority[0].data)
+  host                   = data.aws_eks_cluster.default.endpoint
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.default.certificate_authority.0.data)
   load_config_file       = false
 
   exec {
     api_version = "client.authentication.k8s.io/v1alpha1"
     command     = "aws"
-    args        = ["eks", "get-token", "--cluster-name", data.aws_eks_cluster.default.cluster_id]
+    args        = ["eks", "get-token", "--cluster-name", "${var.name_prefix}-cluster"]
   }
 }
 
 /*
-provider "helm" {
-  kubernetes {
-  host                   = data.aws_eks_cluster.default.endpoint
-  cluster_ca_certificate = base64decode(data.aws_eks_cluster.default.certificate_authority.0.data)
-  token                  = data.aws_eks_cluster_auth.default.token
-  load_config_file       = false
-  }
+provider "kubernetes" {
+  host                   = data.aws_eks_cluster.eks.endpoint
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.eks.certificate_authority.0.data)
+  token                  = data.aws_eks_cluster_auth.eks.token
 }
 */
 
 data "aws_eks_cluster" "default" {
-  depends_on = [aws_eks_cluster.cluster]
-  name       = "${var.name_prefix}-cluster"
+  name = "${var.name_prefix}-cluster"
 }
 
 data "aws_eks_cluster_auth" "default" {
-  depends_on = [aws_eks_cluster.cluster]
-  name       = "${var.name_prefix}-cluster"
+  name = "${var.name_prefix}-cluster"
 }
