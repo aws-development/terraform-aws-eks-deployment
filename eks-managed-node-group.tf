@@ -123,6 +123,17 @@ resource "aws_iam_role" "eks_node_group" {
   ]
 }
 
+
+###kubectl server access
+
+resource "aws_vpc_security_group_ingress_rule" "kubectl_to_cluster" {
+  security_group_id = aws_eks_cluster.cluster.vpc_config[0].cluster_security_group_id
+  description       = "Allow kubectl server to communicate with cluster."
+
+  ip_protocol                  = "-1"
+  referenced_security_group_id = aws_security_group.kubectl_sg.id
+}
+
 #####
 # Worker Security Group rules
 #####
