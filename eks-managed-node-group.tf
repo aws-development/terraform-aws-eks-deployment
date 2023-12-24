@@ -75,8 +75,8 @@ module "eks_node_group" {
 
   subnet_ids = module.vpc_eks.private_subnets
 
-  desired_size = 3
-  min_size     = 3
+  desired_size = 2
+  min_size     = 2
   max_size     = 4
 
   labels = {
