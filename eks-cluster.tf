@@ -49,12 +49,16 @@ resource "aws_iam_role" "cluster" {
   ]
 }
 
-
+resource "null_resource" "update_kubeconfig" {
+  provisioner "local-exec" {
+    command = "aws eks --region ${var.REGION} update-kubeconfig --name ${aws_eks_cluster.cluster.name}"
+  }
+}
 
 # adding roles to aws_auth config map
 
-resource "kubectl_config_map" "aws_auth" {
-  provider = kubernetes
+resource "kubernetes_config_map" "aws_auth" {
+  #provider = kubernetes
   metadata {
     name      = "aws-auth"
     namespace = "kube-system"
