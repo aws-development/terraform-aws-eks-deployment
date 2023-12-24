@@ -23,7 +23,7 @@ resource "aws_instance" "kubectl_ssm" {
 
 # Create a security group
 resource "aws_security_group" "kubectl_sg" {
-  depends_on  = [aws_eks_cluster.cluster]
+  #depends_on  = [aws_eks_cluster.cluster]
   name_prefix = "kubectl_sg"
   description = "kubectl security group"
   vpc_id      = module.vpc_eks.vpc_id
@@ -103,6 +103,14 @@ resource "aws_iam_role" "kubectl_ssm_role" {
 
     ]
   })
+}
+
+
+resource "aws_iam_role_policy" "eks_connector_policy" {
+  name = "EKSConnectorPolicy"
+  role = aws_iam_role.kubectl_ssm_role.id
+
+  policy = file("policies/eks-connector-agent-policy.json")
 }
 
 # Attach the SSM policy to the IAM role
