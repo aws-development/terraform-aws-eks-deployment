@@ -21,6 +21,11 @@ terraform {
       version = "~> 1.14"
     }
 
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+      version = "2.24.0"
+    }
+
   }
 }
 
@@ -52,7 +57,7 @@ provider "helm" {
   }
 }
 
-provider "kubectl" {
+provider "kubernetes" {
   apply_retry_count      = 5
   host                   = data.aws_eks_cluster.default.endpoint
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.default.certificate_authority.0.data)
