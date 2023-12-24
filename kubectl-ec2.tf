@@ -113,6 +113,13 @@ resource "aws_iam_role_policy" "eks_connector_policy" {
   policy = file("policies/eks-connector-agent-policy.json")
 }
 
+resource "aws_iam_role_policy" "eks_developer_policy" {
+  name = "EKSDeveloperPolicy"
+  role = aws_iam_role.kubectl_ssm_role.id
+
+  policy = file("policies/eks-developer-policy.json")
+}
+
 # Attach the SSM policy to the IAM role
 resource "aws_iam_role_policy_attachment" "kubectl_ssm_role_attachment" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"

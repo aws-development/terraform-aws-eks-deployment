@@ -49,6 +49,44 @@ resource "aws_iam_role" "cluster" {
   ]
 }
 
+
+
+# adding roles to aws_auth config map
+
+resource "kubectl_config_map" "aws_auth" {
+  metadata {
+    name      = "aws-auth"
+    namespace = "kube-system"
+  }
+
+  data = {
+    mapRoles = <<-EOT
+      - rolearn: ${aws_iam_role.kubectl_ssm_role.arn}
+        username: admin
+        groups:
+          - system:masters
+
+      - rolearn: ${aws_iam_role.kubectl_ssm_role.arn}
+        username: developer
+        groups:
+          - system:bootstrappers
+          - system:nodes
+
+      - rolearn: ${aws_iam_role.kubectl_ssm_role.arn}
+        username: devops
+        groups:
+          - system:bootstrappers
+          - system:nodes
+          - deployment:write
+
+    EOT
+  }
+}
+
+
+
+
+
 #####
 # Outputs
 #####
