@@ -74,9 +74,11 @@ provider "kubernetes" {
 */
 
 data "aws_eks_cluster" "default" {
-  name = "${var.name_prefix}-cluster"
+  depends_on = [aws_eks_cluster.cluster]
+  name       = "${var.name_prefix}-cluster"
 }
 
 data "aws_eks_cluster_auth" "default" {
-  name = "${var.name_prefix}-cluster"
+  depends_on = [aws_eks_cluster.cluster]
+  name       = "${var.name_prefix}-cluster"
 }
