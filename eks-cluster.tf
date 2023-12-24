@@ -54,6 +54,7 @@ resource "aws_iam_role" "cluster" {
 # adding roles to aws_auth config map
 
 resource "kubectl_config_map" "aws_auth" {
+  provider = kubernetes
   metadata {
     name      = "aws-auth"
     namespace = "kube-system"
