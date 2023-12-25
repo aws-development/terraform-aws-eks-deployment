@@ -38,7 +38,7 @@ resource "aws_security_group" "kubectl_sg" {
   ingress {
     from_port   = 0
     to_port     = 0
-    protocol    = "tcp"
+    protocol    = "-1"
     cidr_blocks = [var.vpc_cidr]
   }
 

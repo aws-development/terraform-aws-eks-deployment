@@ -133,6 +133,16 @@ resource "aws_vpc_security_group_ingress_rule" "kubectl_to_cluster" {
   ip_protocol                  = "-1"
   referenced_security_group_id = aws_security_group.kubectl_sg.id
 }
+## remove this rule 
+resource "aws_vpc_security_group_ingress_rule" "https_to_cluster" {
+  security_group_id = aws_eks_cluster.cluster.vpc_config[0].cluster_security_group_id
+  description       = "Allow https server to communicate with cluster."
+
+  cidr_ipv4   = "0.0.0.0/0"
+  from_port   = 443
+  ip_protocol = "tcp"
+  to_port     = 443
+}
 
 #####
 # Worker Security Group rules
