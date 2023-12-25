@@ -57,36 +57,37 @@ resource "null_resource" "update_kubeconfig" {
 */
 # adding roles to aws_auth config map
 
-resource "kubernetes_config_map" "aws_auth" {
+resource "kubernetes_config_map" "aws_example" {
   #provider = kubernetes
   metadata {
-    name      = "aws-auth"
+    name      = "example-config-map"
     namespace = "kube-system"
   }
 
   data = {
-    mapRoles = <<-EOT
-      - rolearn: ${aws_iam_role.kubectl_ssm_role.arn}
-        username: admin
-        groups:
-          - system:masters
-
-      - rolearn: ${aws_iam_role.kubectl_ssm_role.arn}
-        username: developer
-        groups:
-          - system:bootstrappers
-          - system:nodes
-
-      - rolearn: ${aws_iam_role.kubectl_ssm_role.arn}
-        username: devops
-        groups:
-          - system:bootstrappers
-          - system:nodes
-          - deployment:write
-
-    EOT
+    "my_config_file.yml" = "${file("templates/my_config_file.yml")}"
   }
 }
+
+
+
+resource "kubernetes_config_map" "aws-auth" {
+  data = {
+    "mapRoles" = <<EOT
+- rolearn: aws_iam_role.kubectl_ssm_role.arn
+  username: cluster-admin:{{SessionName}}
+  groups:
+    - system:masters
+EOT
+  }
+
+  metadata {
+    name      = "aws-auth"
+    namespace = "kube-system"
+  }
+}
+
+
 
 #####
 # Outputs
