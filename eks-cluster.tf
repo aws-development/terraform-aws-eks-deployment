@@ -55,9 +55,7 @@ resource "null_resource" "update_kubeconfig" {
   }
 }
 */
-# adding roles to
-
- config map
+# adding roles to config map
 
 resource "kubernetes_config_map" "aws_example" {
   #provider = kubernetes
