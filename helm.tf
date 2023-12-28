@@ -43,7 +43,7 @@ resource "helm_release" "alb_controller" {
   }
 
   values = [
-    yamlencode(var.settings)
+    yamlencode(var.alb_controller_settings)
   ]
 
 }
