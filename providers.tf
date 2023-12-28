@@ -27,7 +27,18 @@ terraform {
       version = ">= 1.7.0"
     }
 
+    wiz = {
+       version = " ~> 1.1"
+       source = "tf.app.wiz.io/wizsec/wiz"
+     }
+
   }
+}
+
+provider "wiz" {
+client_id = var.wiz_auth_client_id
+secret = var.wiz_auth_client_secret
+
 }
 
 provider "kubectl" {

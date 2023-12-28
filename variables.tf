@@ -264,3 +264,75 @@ variable "alb_controller_settings" {
   default     = {}
   description = "Additional settings which will be passed to the Helm chart values."
 }
+
+
+
+###wiz eks connector variables
+
+variable "wiz_image_path" {
+  type    = string
+  default = "wiziopublic.azurecr.io/wiz-app/wiz-broker:2.4"
+}
+
+variable "wiz_broker_client_id" {
+  type = string
+}
+
+variable "wiz_broker_client_secret" {
+  type      = string
+  sensitive = true
+}
+
+variable "wiz_env" {
+  type = string
+  default = ""
+}
+
+variable "wiz_namespace" {
+  type = string
+  default = ""
+}
+
+variable "wiz_connector_name" {
+  type = string
+}
+
+variable "wiz_server_endpoint" {
+  type = string
+  default = "https://kubernetes.default.svc.cluster.local"
+}
+
+variable "wiz_connector_type" {
+  type = string
+  default = "kubernetes"
+}
+
+variable "wiz_is_private" {
+  type = bool
+  default = true
+}
+
+
+variable "wiz_url" {
+  type    = string
+  default = "https://api.us34.app.wiz.io/graphql"
+}
+
+variable "wiz_auth_client_id" {
+  type = string
+}
+
+variable "wiz_auth_client_secret" {
+  type      = string
+  sensitive = true
+}
+
+variable "wiz_auth_audience" {
+  type    = string
+  default = "beyond-api"
+}
+
+variable "wiz_auth_url" {
+  type    = string
+  default = "https://auth.app.wiz.io/oauth/token"
+}
