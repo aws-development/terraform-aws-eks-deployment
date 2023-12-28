@@ -46,7 +46,7 @@ metadata:
 
 YAML
 
-depends_on = [aws_eks_cluster.cluster]
+  depends_on = [aws_eks_cluster.cluster]
 }
 /*
 locals {

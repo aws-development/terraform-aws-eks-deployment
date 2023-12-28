@@ -58,10 +58,10 @@ resource "aws_security_group" "kubectl_sg" {
   }
 
   ingress {
-    from_port = 443
-    to_port   = 443
-    protocol  = "tcp"
-    cidr_blocks = ["49.36.144.72/32","${var.vpc_cidr}"]
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["49.36.144.72/32", "${var.vpc_cidr}"]
     #cidr_blocks = ["0.0.0.0/0"]
   }
 
