@@ -274,41 +274,34 @@ variable "wiz_image_path" {
   default = "wiziopublic.azurecr.io/wiz-app/wiz-broker:2.4"
 }
 
-variable "wiz_broker_client_id" {
-  type = string
-}
-
-variable "wiz_broker_client_secret" {
-  type      = string
-  sensitive = true
-}
 
 variable "wiz_env" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "wiz_namespace" {
-  type = string
-  default = ""
+  type    = string
+  default = "wiz"
 }
 
 variable "wiz_connector_name" {
-  type = string
+  type    = string
+  default = "wiz-eks-ap-dev-poc-connector"
 }
 
 variable "wiz_server_endpoint" {
-  type = string
+  type    = string
   default = "https://kubernetes.default.svc.cluster.local"
 }
 
 variable "wiz_connector_type" {
-  type = string
-  default = "kubernetes"
+  type    = string
+  default = "eks"
 }
 
 variable "wiz_is_private" {
-  type = bool
+  type    = bool
   default = true
 }
 

@@ -28,16 +28,16 @@ terraform {
     }
 
     wiz = {
-       version = " ~> 1.1"
-       source = "tf.app.wiz.io/wizsec/wiz"
-     }
+      version = " ~> 1.1"
+      source  = "tf.app.wiz.io/wizsec/wiz"
+    }
 
   }
 }
 
 provider "wiz" {
-client_id = var.wiz_auth_client_id
-secret = var.wiz_auth_client_secret
+  client_id = var.wiz_auth_client_id
+  secret    = var.wiz_auth_client_secret
 
 }
 
