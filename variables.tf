@@ -329,3 +329,14 @@ variable "wiz_auth_url" {
   type    = string
   default = "https://auth.app.wiz.io/oauth/token"
 }
+
+variable "broker_client_id" {
+  type    = string
+  default = ""
+}
+
+variable "broker_client_secret" {
+  type      = string
+  sensitive = true
+  default   = ""
+}
