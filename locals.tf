@@ -29,7 +29,7 @@ systemctl start amazon-ssm-agent
 systemctl enable amazon-ssm-agent
 echo "ssm agent installed"
 echo "installing collectd agent"
-amazon-linux-extras install collectd
+yum install collectd -y
 echo "collectd agent installed"
 
 #install kubectl binary
@@ -37,7 +37,8 @@ curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.28.3/2023-11-14/bin/linu
 chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
 #install helm
-sudo yum install openssl
+ yum install openssl -y
+ yum install git -y
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh
 chmod 700 get_helm.sh
 ./get_helm.sh
@@ -48,7 +49,7 @@ PLATFORM=$(uname -s)_$ARCH
 curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz"
 tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
 sudo mv /tmp/eksctl /usr/local/bin
-aws eks update-kubeconfig --region '${var.REGION}' --name '${aws_eks_cluster.cluster.name}
+aws eks update-kubeconfig --region '${var.REGION}' --name '${aws_eks_cluster.cluster.name}'
 USERDATA
     prod = <<USERDATA
 #!/bin/bash
@@ -67,7 +68,7 @@ systemctl start amazon-ssm-agent
 systemctl enable amazon-ssm-agent
 echo "ssm agent installed"
 echo "installing collectd agent"
-amazon-linux-extras install collectd
+yum install collectd -y
 echo "collectd agent installed"
 
 #install kubectl binary
@@ -75,7 +76,8 @@ curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.28.3/2023-11-14/bin/linu
 chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
 #install helm
-sudo yum install openssl
+yum install openssl -y
+yum install git -y
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh
 chmod 700 get_helm.sh
 ./get_helm.sh
@@ -86,7 +88,7 @@ PLATFORM=$(uname -s)_$ARCH
 curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz"
 tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
 sudo mv /tmp/eksctl /usr/local/bin
-aws eks update-kubeconfig --region '${var.REGION}' --name '${aws_eks_cluster.cluster.name}
+aws eks update-kubeconfig --region '${var.REGION}' --name '${aws_eks_cluster.cluster.name}'
 USERDATA
     dev  = <<USERDATA
 #!/bin/bash
@@ -105,7 +107,7 @@ systemctl start amazon-ssm-agent
 systemctl enable amazon-ssm-agent
 echo "ssm agent installed"
 echo "installing collectd agent"
-amazon-linux-extras install collectd
+yum  install collectd -y
 echo "collectd agent installed"
 
 #install kubectl binary
@@ -115,7 +117,9 @@ chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
 
 #install helm
-sudo yum install openssl
+ yum install openssl -y
+ yum install git -y
+
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh
 chmod 700 get_helm.sh
 ./get_helm.sh
@@ -125,8 +129,8 @@ ARCH=amd64
 PLATFORM=$(uname -s)_$ARCH
 curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz"
 tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
-sudo mv /tmp/eksctl /usr/local/bin 
-aws eks update-kubeconfig --region '${var.REGION}' --name '${aws_eks_cluster.cluster.name}
+sudo mv /tmp/eksctl /usr/local/bin
+aws eks update-kubeconfig --region '${var.REGION}' --name '${aws_eks_cluster.cluster.name}'
 USERDATA
   }
   eks_kubectl_node_userdata = local.tf_eks_kubectl_node_userdata[var.env]
