@@ -22,8 +22,21 @@ terraform {
       version = "2.24.0"
     }
 
+    kubectl = {
+  source  = "gavinbunney/kubectl"
+  version = ">= 1.7.0"
+}
+
   }
 }
+
+provider "kubectl" {
+  host                   = data.aws_eks_cluster.default.endpoint
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.default.certificate_authority.0.data)
+  token                  = data.aws_eks_cluster_auth.default.token
+  load_config_file       = false
+}
+
 
 provider "aws" {
   region     = var.REGION
