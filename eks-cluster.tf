@@ -55,7 +55,9 @@ resource "null_resource" "update_kubeconfig" {
   }
 }
 */
-# adding roles to aws_auth config map
+# adding roles to
+
+ config map
 
 resource "kubernetes_config_map" "aws_example" {
   #provider = kubernetes
@@ -70,7 +72,7 @@ resource "kubernetes_config_map" "aws_example" {
 }
 
 
-
+/*
 resource "kubernetes_config_map" "aws-auth" {
   data = {
     "mapRoles" = <<EOT
@@ -87,7 +89,7 @@ EOT
   }
 }
 
-
+*/
 
 #####
 # Outputs
