@@ -23,7 +23,7 @@ resource "helm_release" "wiz_k8_admission_controller" {
 
   set {
     name  = "wizApiToken.secret.create"
-    value = false
+    value = true
   }
 
   set {
