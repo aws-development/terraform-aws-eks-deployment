@@ -358,7 +358,7 @@ variable "wiz_runtime_sensor_helm_chart_name" {
 
 variable "wiz_runtime_sensor_helm_chart_release_name" {
   type    = string
-  default = "wiz-sensor-release"
+  default = "wiz-sensor"
   description = "Wiz runtime sensor helm chart release name"
 }
 
