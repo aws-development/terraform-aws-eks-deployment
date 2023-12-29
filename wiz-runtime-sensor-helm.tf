@@ -29,6 +29,4 @@ resource "helm_release" "wiz_runtime_sensor" {
     name  = "wizApiToken.clientToken"
     value = var.wiz_runtime_sensor_sa_secret_key
   }
-
-
 }

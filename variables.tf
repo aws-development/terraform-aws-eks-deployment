@@ -350,53 +350,107 @@ variable "wiz_install_runtime_sensor" {
 
 
 variable "wiz_runtime_sensor_helm_chart_name" {
-  type    = string
-  default = "wiz-sensor"
+  type        = string
+  default     = "wiz-sensor"
   description = "Wiz runtime sensor helm chart name"
 }
 
 
 variable "wiz_runtime_sensor_helm_chart_release_name" {
-  type    = string
-  default = "wiz-sensor"
+  type        = string
+  default     = "wiz-sensor"
   description = "Wiz runtime sensor helm chart release name"
 }
 
 variable "wiz_runtime_sensor_helm_chart_repo" {
-  type    = string
-  default = "https://charts.wiz.io/"
+  type        = string
+  default     = "https://charts.wiz.io/"
   description = "Wiz runtime sensor helm chart repo"
 }
 
 variable "wiz_runtime_sensor_helm_chart_version" {
-  type    = string
-  default = "1.0.3011"
+  type        = string
+  default     = "1.0.3011"
   description = "Wiz runtime sensor helm chart version"
 }
 
 
 variable "wiz_registry_username" {
-  type    = string
-  default = ""
+  type        = string
+  default     = ""
   description = "Wiz registry username"
 }
 
 variable "wiz_registry_password" {
-  type    = string
-  default = ""
-  sensitive = true
+  type        = string
+  default     = ""
+  sensitive   = true
   description = "Wiz registry password"
 }
 
 variable "wiz_runtime_sensor_sa_secret_id" {
-  type    = string
-  default = ""
+  type        = string
+  default     = ""
   description = "Wiz runtime sensor service account secret id"
 }
 
 variable "wiz_runtime_sensor_sa_secret_key" {
-  type    = string
-  default = ""
-  sensitive = true
+  type        = string
+  default     = ""
+  sensitive   = true
   description = "Wiz runtime sensor service account secret key"
+}
+
+
+
+#variables for wiz admission controller
+
+variable "wiz_install_k8_admission_controller" {
+  type    = bool
+  default = true
+}
+
+
+variable "wiz_k8_admission_controller_helm_chart_name" {
+  type        = string
+  default     = "wiz-admission-controller"
+  description = "Wiz admission controller helm chart name"
+}
+
+
+variable "wiz_k8_admission_controller_helm_chart_release_name" {
+  type        = string
+  default     = "wiz-admission-controller"
+  description = "Wiz admission controller helm chart release name"
+}
+
+variable "wiz_k8_admission_controller_helm_chart_repo" {
+  type        = string
+  default     = "https://charts.wiz.io/"
+  description = "Wiz admission controller  helm chart repo"
+}
+
+variable "wiz_k8_admission_controller_helm_chart_version" {
+  type        = string
+  default     = "1.0.3011"
+  description = "Wiz admission controller helm chart version"
+}
+
+variable "wiz_k8_admission_controller_sa_name" {
+  type        = string
+  default     = "wiz-admission-controller-sa"
+  description = "Wiz admission controller service account name"
+}
+
+variable "wiz_k8_admission_controller_sa_secret_id" {
+  type        = string
+  default     = ""
+  description = "Wiz admission controller service account secret id"
+}
+
+variable "wiz_k8_admission_controller_sa_secret_key" {
+  type        = string
+  default     = ""
+  sensitive   = true
+  description = "Wiz admission controller service account secret key"
 }
