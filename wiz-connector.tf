@@ -102,8 +102,8 @@ resource "kubernetes_secret" "wiz_broker_config" {
   type = "Opaque"
 
   data = {
-    "WIZ_CLIENT_ID" : var.broker_client_id
-    "WIZ_CLIENT_TOKEN" : var.broker_client_secret
+    "WIZ_CLIENT_ID" : var.wiz_broker_client_id
+    "WIZ_CLIENT_TOKEN" : var.wiz_broker_client_secret
     "WIZ_ENV" : var.wiz_env
     "CONNECTOR_ID" : wiz_kubernetes_connector.connector.id
     "CONNECTOR_TOKEN" : wiz_kubernetes_connector.connector.tunnel_token
