@@ -432,7 +432,7 @@ variable "wiz_k8_admission_controller_helm_chart_repo" {
 
 variable "wiz_k8_admission_controller_helm_chart_version" {
   type        = string
-  default     = "1.0.3011"
+  default     = "3.4.5"
   description = "Wiz admission controller helm chart version"
 }
 
