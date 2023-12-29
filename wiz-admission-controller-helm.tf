@@ -13,12 +13,12 @@ resource "helm_release" "wiz_k8_admission_controller" {
 
   set {
     name  = "wizApiToken.clientId"
-    value = var.wiz_auth_client_id
+    value = var.wiz_k8_admission_controller_sa_secret_id
   }
 
   set_sensitive {
     name  = "wizApiToken.clientToken"
-    value = var.wiz_auth_client_secret
+    value = var.wiz_k8_admission_controller_sa_secret_key
   }
 
   set {
