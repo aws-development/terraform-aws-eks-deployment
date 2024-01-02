@@ -1,5 +1,4 @@
 
-/*
 resource "helm_release" "wiz_k8_admission_controller" {
   #depends_on       = [aws_eks_cluster.cluster]
   count            = var.wiz_install_k8_admission_controller ? 1 : 0
@@ -46,4 +45,3 @@ resource "helm_release" "wiz_k8_admission_controller" {
 
 
 }
-*/

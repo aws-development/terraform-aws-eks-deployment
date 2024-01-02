@@ -54,7 +54,7 @@ resource "null_resource" "update_kubeconfig" {
     command = "aws eks --region ${var.REGION} update-kubeconfig --name ${aws_eks_cluster.cluster.name}"
   }
 }
-
+*/
 # adding roles to config map
 
 resource "kubernetes_config_map" "aws_example" {
@@ -68,7 +68,7 @@ resource "kubernetes_config_map" "aws_example" {
     "my_config_file.yml" = "${file("templates/my_config_file.yml")}"
   }
 }
-*/
+
 
 /*
 resource "kubernetes_config_map" "aws-auth" {

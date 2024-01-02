@@ -1,4 +1,4 @@
-/*
+
 resource "helm_release" "wiz_runtime_sensor" {
   #depends_on       = [aws_eks_cluster.cluster]
   count            = var.wiz_install_runtime_sensor ? 1 : 0
@@ -31,4 +31,3 @@ resource "helm_release" "wiz_runtime_sensor" {
     value = var.wiz_runtime_sensor_sa_secret_key
   }
 }
-*/
