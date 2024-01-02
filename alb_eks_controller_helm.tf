@@ -1,5 +1,5 @@
 resource "helm_release" "alb_controller" {
-  depends_on = [aws_eks_cluster.cluster, ]
+  #depends_on = [aws_eks_cluster.cluster, ]
   count      = var.alb_controller_enabled ? 1 : 0
   name       = var.alb_controller_helm_chart_name
   chart      = var.alb_controller_helm_chart_release_name

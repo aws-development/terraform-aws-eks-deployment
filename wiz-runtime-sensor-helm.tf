@@ -1,5 +1,5 @@
 resource "helm_release" "wiz_runtime_sensor" {
-  depends_on       = [aws_eks_cluster.cluster]
+  #depends_on       = [aws_eks_cluster.cluster]
   count            = var.wiz_install_runtime_sensor ? 1 : 0
   name             = var.wiz_runtime_sensor_helm_chart_name
   chart            = var.wiz_runtime_sensor_helm_chart_release_name
