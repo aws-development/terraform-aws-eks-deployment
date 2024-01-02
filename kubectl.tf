@@ -22,7 +22,7 @@ YAML
 
 */
 
-
+/*
 resource "kubectl_manifest" "aws_auth" {
   yaml_body = <<YAML
 apiVersion: v1
@@ -48,6 +48,7 @@ YAML
 
   depends_on = [aws_eks_cluster.cluster]
 }
+*/
 /*
 locals {
   aws_user_role = "arn:aws:iam::1234:role/AWSReservedSSO_AWSAdministratorAccess_ce861bcf52b0eabc"
