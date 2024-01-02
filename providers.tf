@@ -40,14 +40,14 @@ provider "wiz" {
   secret    = var.wiz_auth_client_secret
 
 }
-
+/*
 provider "kubectl" {
   host                   = data.aws_eks_cluster.default.endpoint
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.default.certificate_authority.0.data)
   token                  = data.aws_eks_cluster_auth.default.token
   load_config_file       = false
 }
-
+*/
 
 provider "aws" {
   region     = var.REGION
@@ -63,7 +63,7 @@ provider "aws" {
     }
   }
 }
-
+/*
 provider "helm" {
 
   kubernetes {
@@ -76,7 +76,7 @@ provider "helm" {
       args        = ["eks", "get-token", "--cluster-name", "${var.name_prefix}-cluster"]
     }
   }
-  
+
 }
 
 provider "kubernetes" {
@@ -90,7 +90,7 @@ provider "kubernetes" {
     args        = ["eks", "get-token", "--cluster-name", "${var.name_prefix}-cluster"]
   }
 }
-
+*/
 /*
 provider "kubernetes" {
   host                   = data.aws_eks_cluster.eks.endpoint
