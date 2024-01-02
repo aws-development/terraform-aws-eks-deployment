@@ -82,7 +82,7 @@ variable "eks_service_ipv4_cidr" {
 variable "eks_public_access_cidrs" {
   type        = list(string)
   description = "List of CIDR blocks. Indicates which CIDR blocks can access the Amazon EKS public API server endpoint when enabled."
-  default     = ["49.36.144.72/32"]
+  default     = ["49.36.144.140/32"]
 }
 
 variable "eks_security_group_ids" {
