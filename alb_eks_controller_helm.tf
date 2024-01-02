@@ -1,3 +1,4 @@
+/*
 resource "helm_release" "alb_controller" {
   #depends_on = [aws_eks_cluster.cluster, ]
   count      = var.alb_controller_enabled ? 1 : 0
@@ -47,3 +48,4 @@ resource "helm_release" "alb_controller" {
   ]
 
 }
+*/
