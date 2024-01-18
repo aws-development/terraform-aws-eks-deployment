@@ -214,7 +214,7 @@ variable "features" {
 
 variable "alb_controller_enabled" {
   type        = bool
-  default     = true
+  default     = false
   description = "Variable indicating whether deployment is enabled."
 }
 
@@ -344,8 +344,9 @@ variable "wiz_broker_client_secret" {
 #variables for wiz runtime sensor
 
 variable "wiz_install_runtime_sensor" {
-  type    = bool
-  default = true
+  type        = bool
+  default     = false
+  description = "Whether to Wiz runtime sensor helm chart or not ?"
 }
 
 
@@ -406,8 +407,9 @@ variable "wiz_runtime_sensor_sa_secret_key" {
 #variables for wiz admission controller
 
 variable "wiz_install_k8_admission_controller" {
-  type    = bool
-  default = true
+  type        = bool
+  default     = false
+  description = "Wheter to install Wiz admission controller helm chart or not ?"
 }
 
 

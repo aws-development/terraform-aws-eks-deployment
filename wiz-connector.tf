@@ -1,4 +1,4 @@
-
+/*
 # Remove this if the namespace already exists
 resource "kubernetes_namespace" "wiz_namespace" {
   metadata {
@@ -172,3 +172,4 @@ resource "kubernetes_deployment" "wiz_broker" {
     }
   }
 }
+*/
