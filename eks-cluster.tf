@@ -56,7 +56,7 @@ resource "null_resource" "update_kubeconfig" {
 }
 */
 # adding roles to config map
-
+/*
 resource "kubernetes_config_map" "aws_example" {
   #provider = kubernetes
   metadata {
@@ -68,7 +68,7 @@ resource "kubernetes_config_map" "aws_example" {
     "my_config_file.yml" = "${file("templates/my_config_file.yml")}"
   }
 }
-
+*/
 
 /*
 resource "kubernetes_config_map" "aws-auth" {

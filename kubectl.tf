@@ -21,8 +21,8 @@ YAML
 }
 
 */
-
-
+### move this to app deployemnt repo
+/*
 resource "kubectl_manifest" "aws_auth" {
   yaml_body = <<YAML
 apiVersion: v1
@@ -48,6 +48,7 @@ YAML
 
   depends_on = [aws_eks_cluster.cluster]
 }
+*/
 
 /*
 locals {
