@@ -238,4 +238,11 @@ resource "aws_eip" "kubectl_server_eip" {
   count    = var.instance_count
   instance = aws_instance.kubectl_ssm[count.index].id
   domain   = "vpc"
+  tags = {
+    Name        = "kubectl-instance-eip-${count.index + 1}"
+    Environment = "dev"
+    envoy       = "enabled"
+    COUNTRY     = "IN"
+  }
+
 }
