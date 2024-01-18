@@ -180,7 +180,7 @@ variable "ebs_encrypted" {
 
 variable "instance_count" {
   type    = number
-  default = 1
+  default = 1   # one for kubectl and one for terraform agent
 }
 
 variable "ami_id" {
@@ -190,7 +190,7 @@ variable "ami_id" {
 
 variable "instance_type" {
   type    = string
-  default = "t2.medium"
+  default = "t3a.large"    # change this to t3a.large
 }
 
 variable "key_name" {

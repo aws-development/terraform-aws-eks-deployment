@@ -14,13 +14,13 @@ module "vpc_eks" {
   single_nat_gateway     = false
   one_nat_gateway_per_az = true
 
-  enable_vpn_gateway = true
+  enable_vpn_gateway = false
 
   enable_dns_hostnames = true
   enable_dns_support   = true
 
-  propagate_private_route_tables_vgw = true
-  propagate_public_route_tables_vgw  = true
+  propagate_private_route_tables_vgw = false
+  propagate_public_route_tables_vgw  = false
 
   #enable_flow_log                      = true
   #create_flow_log_cloudwatch_iam_role  = true

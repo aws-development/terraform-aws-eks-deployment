@@ -68,7 +68,7 @@ resource "aws_security_group" "kubectl_sg" {
 
 # Create an IAM instance profile for SSM
 resource "aws_iam_instance_profile" "kubectl_ssm_profile" {
-  name = "kubectl_ssm_profile_new"
+  name = "kubectl_ssm_iam_instance_profile"
 
   #role = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
   role = aws_iam_role.kubectl_ssm_role.name

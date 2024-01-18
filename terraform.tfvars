@@ -1,12 +1,12 @@
 name_prefix = "wiz-eks-ap-dev-poc"
 
 vpc_cidr              = "10.100.0.0/16"
-private_subnets_cidrs = ["10.100.0.0/18", "10.100.64.0/18", "10.100.128.0/18"]
-public_subnets_cidrs  = ["10.100.192.0/20", "10.100.208.0/20", "10.100.224.0/20"]
-azs                   = ["ap-southeast-1a", "ap-southeast-1b", "ap-southeast-1c"]
-#private_subnets_cidrs = ["10.100.0.0/18", "10.100.64.0/18"]
-#public_subnets_cidrs  = ["10.100.192.0/20", "10.100.208.0/20"]
-#azs                   = ["ap-southeast-1a", "ap-southeast-1b"]
+#private_subnets_cidrs = ["10.100.0.0/18", "10.100.64.0/18", "10.100.128.0/18"]
+#public_subnets_cidrs  = ["10.100.192.0/20", "10.100.208.0/20", "10.100.224.0/20"]
+#azs                   = ["ap-southeast-1a", "ap-southeast-1b", "ap-southeast-1c"]
+private_subnets_cidrs = ["10.100.0.0/18", "10.100.64.0/18"]
+public_subnets_cidrs  = ["10.100.192.0/20", "10.100.208.0/20"]
+azs                   = ["ap-southeast-1a", "ap-southeast-1b"]
 
 eks_enabled_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
 eks_service_ipv4_cidr = "10.190.0.0/16"
