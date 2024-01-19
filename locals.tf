@@ -32,6 +32,14 @@ echo "installing collectd agent"
 yum install collectd -y
 echo "collectd agent installed"
 
+#install flux
+curl -s https://fluxcd.io/install.sh | sudo bash
+#install kubeseal
+wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.25.0/kubeseal-0.25.0-linux-amd64.tar.gz
+tar xfz kubeseal-0.25.0-linux-amd64.tar.gz
+sudo install -m 755 kubeseal /usr/local/bin/kubeseal
+
+
 #install kubectl binary
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.28.3/2023-11-14/bin/linux/amd64/kubectl
 chmod +x ./kubectl
@@ -70,6 +78,12 @@ echo "ssm agent installed"
 echo "installing collectd agent"
 yum install collectd -y
 echo "collectd agent installed"
+#install flux
+curl -s https://fluxcd.io/install.sh | sudo bash
+#install kubeseal
+wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.25.0/kubeseal-0.25.0-linux-amd64.tar.gz
+tar xfz kubeseal-0.25.0-linux-amd64.tar.gz
+sudo install -m 755 kubeseal /usr/local/bin/kubeseal
 
 #install kubectl binary
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.28.3/2023-11-14/bin/linux/amd64/kubectl
@@ -110,8 +124,14 @@ echo "installing collectd agent"
 yum  install collectd -y
 echo "collectd agent installed"
 
-#install kubectl binary
+#install flux
+curl -s https://fluxcd.io/install.sh | sudo bash
+#install kubeseal
+wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.25.0/kubeseal-0.25.0-linux-amd64.tar.gz
+tar xfz kubeseal-0.25.0-linux-amd64.tar.gz
+sudo install -m 755 kubeseal /usr/local/bin/kubeseal
 
+#install kubectl binary
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.28.3/2023-11-14/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
