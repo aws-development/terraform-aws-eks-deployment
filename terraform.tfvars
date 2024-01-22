@@ -14,7 +14,7 @@ eks_service_ipv4_cidr = "10.190.0.0/16"
 instance_types = ["t2.medium"]
 
 eks_public_access_cidrs = [
-  "49.36.144.140/32"
+  "49.36.144.200/32"
 ]
 
 eks_version = "1.28"

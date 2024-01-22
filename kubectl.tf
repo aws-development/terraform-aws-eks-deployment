@@ -39,7 +39,7 @@ data:
       rolearn: ${aws_iam_role.kubectl_ssm_role.arn}
       username: system:node:{{EC2PrivateDNSName}}
 metadata:
-  labels:
+  labels: 
     app.kubernetes.io/managed-by: Terraform
   name: aws-auth
   namespace: kube-system
