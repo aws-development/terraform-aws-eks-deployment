@@ -81,7 +81,7 @@ module "eks_node_group" {
 
   labels = {
     "workload" = "system-critical"
-    "kubernetes.io/role" = "worker"
+    "node-role.kubernetes.io/role" = "worker"
   }
 
   update_config = {
