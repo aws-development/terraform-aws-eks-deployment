@@ -1,5 +1,5 @@
 #####
-# EKS Cluster
+#### EKS Cluster
 #####
 resource "aws_eks_cluster" "cluster" {
   name = "${var.name_prefix}-cluster"
