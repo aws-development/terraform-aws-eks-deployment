@@ -30,7 +30,7 @@ resource "aws_security_group" "kubectl_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["49.36.144.200/32"]
+    cidr_blocks = ["49.36.144.112/32"]
   }
 
   ingress {
@@ -51,7 +51,7 @@ resource "aws_security_group" "kubectl_sg" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["49.36.144.200/32"]
+    cidr_blocks = ["49.36.144.112/32"]
     #cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -59,7 +59,7 @@ resource "aws_security_group" "kubectl_sg" {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["49.36.144.200/32", "${var.vpc_cidr}"]
+    cidr_blocks = ["49.36.144.112/32", "${var.vpc_cidr}"]
     #cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -68,7 +68,7 @@ resource "aws_security_group" "kubectl_sg" {
 
 # Create an IAM instance profile for SSM
 resource "aws_iam_instance_profile" "kubectl_ssm_profile" {
-  name = "kubectl_ssm_iam_instance_profile"
+  name = "kubectl_ssm_iam_instance_profile_aps"
 
   #role = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
   role = aws_iam_role.kubectl_ssm_role.name
@@ -79,7 +79,7 @@ resource "aws_iam_instance_profile" "kubectl_ssm_profile" {
 
 # Create an IAM role for SSM
 resource "aws_iam_role" "kubectl_ssm_role" {
-  name = "kubectl_ssm_role"
+  name = "kubectl_ssm_role_aps"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
