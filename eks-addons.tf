@@ -58,13 +58,13 @@ resource "aws_eks_addon" "aws_ebs_csi_driver" {
 }
 
 resource "aws_iam_role" "ebs_csi_controller_sa" {
-  name = "ebs-csi-controller-sa"
+  name = "ebs-csi-controller-sa-aps"
 
   assume_role_policy = templatefile("policies/oidc_assume_role_policy.json", {
     OIDC_ARN  = aws_iam_openid_connect_provider.cluster.arn,
     OIDC_URL  = replace(aws_iam_openid_connect_provider.cluster.url, "https://", ""),
     NAMESPACE = "kube-system",
-    SA_NAME   = "ebs-csi-controller-sa"
+    SA_NAME   = "ebs-csi-controller-sa-aps"
   })
 
   managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"]
