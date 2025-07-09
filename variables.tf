@@ -19,7 +19,7 @@ variable "AWS_SECRET_KEY" {
 variable "REGION" {
   type        = string
   description = "AWS region used across resources created by this module."
-  default     = "ap-southeast-1"
+  default     = "us-east-1"
 }
 
 
