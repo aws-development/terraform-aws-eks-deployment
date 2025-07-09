@@ -185,7 +185,7 @@ variable "instance_count" {
 
 variable "ami_id" {
   type    = string
-  default = "ami-0e4b5d31e60aa0acd"
+  default = "ami-05ffe3c48a9991133"
 }
 
 variable "instance_type" {
