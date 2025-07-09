@@ -165,6 +165,7 @@ resource "aws_security_group" "eks_vpc_endpoint_guardduty" {
   }
 }
 
+/*
 resource "aws_vpc_security_group_ingress_rule" "eks_vpc_guardduty" {
   security_group_id = aws_security_group.eks_vpc_endpoint_guardduty.id
   description       = "Ingress for port 443."
@@ -174,7 +175,7 @@ resource "aws_vpc_security_group_ingress_rule" "eks_vpc_guardduty" {
   ip_protocol = "tcp"
   to_port     = 443
 }
-
+*/
 #####
 # VPC Flow logs
 #####
