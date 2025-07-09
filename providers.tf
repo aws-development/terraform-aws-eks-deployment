@@ -33,7 +33,7 @@ terraform {
     }
 
     wiz = {
-      version = " ~> 1.1"
+      version = " ~> 1.8"
       source  = "tf.app.wiz.io/wizsec/wiz"
     }
 
