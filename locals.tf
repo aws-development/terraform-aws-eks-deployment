@@ -41,7 +41,7 @@ sudo install -m 755 kubeseal /usr/local/bin/kubeseal
 
 
 #install kubectl binary
-curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.28.3/2023-11-14/bin/linux/amd64/kubectl
+curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.35.0/2025-11-13/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
 #install helm
@@ -86,7 +86,7 @@ tar xfz kubeseal-0.25.0-linux-amd64.tar.gz
 sudo install -m 755 kubeseal /usr/local/bin/kubeseal
 
 #install kubectl binary
-curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.28.3/2023-11-14/bin/linux/amd64/kubectl
+curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.35.0/2025-11-13/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
 #install helm
@@ -132,7 +132,7 @@ tar xfz kubeseal-0.25.0-linux-amd64.tar.gz
 sudo install -m 755 kubeseal /usr/local/bin/kubeseal
 
 #install kubectl binary
-curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.28.3/2023-11-14/bin/linux/amd64/kubectl
+curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.35.0/2025-11-13/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
 
@@ -192,3 +192,4 @@ USERDATA
     }
   }
 }
+

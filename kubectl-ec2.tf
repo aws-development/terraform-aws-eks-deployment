@@ -6,7 +6,7 @@ resource "aws_instance" "kubectl_ssm" {
   key_name               = aws_key_pair.workernode_key_pair.key_name
   subnet_id              = element(module.vpc_eks.public_subnets, 0)
   vpc_security_group_ids = [aws_security_group.kubectl_sg.id]
-  user_data              = base64encode(local.eks_kubectl_node_userdata)
+  user_data_base64       = base64encode(local.eks_kubectl_node_userdata)
 
 
   tags = {
@@ -120,9 +120,9 @@ resource "aws_iam_role_policy" "eks_developer_policy" {
 
 # Attach the SSM policy to the IAM role
 resource "aws_iam_role_policy_attachment" "kubectl_ssm_role_attachment" {
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
-  #policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonSSMManagedInstanceCore"
-  role = aws_iam_role.kubectl_ssm_role.name
+  # AmazonEC2RoleforSSM is deprecated - use AmazonSSMManagedInstanceCore instead.
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  role       = aws_iam_role.kubectl_ssm_role.name
 }
 
 resource "aws_iam_role_policy_attachment" "kubectl_eks_role_attachment" {

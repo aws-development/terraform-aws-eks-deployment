@@ -120,12 +120,6 @@ resource "aws_iam_role" "adot_collector" {
     SA_NAME   = "adot-collector"
   })
 
-  managed_policy_arns = [
-    "arn:aws:iam::aws:policy/AmazonPrometheusRemoteWriteAccess",
-    "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
-    "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy",
-  ]
-
   force_detach_policies = true
 
   tags = {
@@ -133,3 +127,18 @@ resource "aws_iam_role" "adot_collector" {
     "ServiceAccountNamespace" = "opentelemetry-operator-system"
   }
 }
+
+locals {
+  adot_collector_managed_policies = toset([
+    "arn:aws:iam::aws:policy/AmazonPrometheusRemoteWriteAccess",
+    "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
+    "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy",
+  ])
+}
+
+resource "aws_iam_role_policy_attachment" "adot_collector" {
+  for_each   = local.adot_collector_managed_policies
+  policy_arn = each.value
+  role       = aws_iam_role.adot_collector.name
+}
+

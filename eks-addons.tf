@@ -66,8 +66,11 @@ resource "aws_iam_role" "ebs_csi_controller_sa" {
     NAMESPACE = "kube-system",
     SA_NAME   = "ebs-csi-controller-sa"
   })
+}
 
-  managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"]
+resource "aws_iam_role_policy_attachment" "ebs_csi_controller_sa_AmazonEBSCSIDriverPolicy" {
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+  role       = aws_iam_role.ebs_csi_controller_sa.name
 }
 
 resource "aws_eks_addon" "kubecost" {
@@ -139,3 +142,38 @@ resource "aws_eks_addon" "cloudwatch" {
     "eks_addon" = "amazon-cloudwatch-observability"
   }
 }
+
+resource "aws_eks_addon" "vpc_cni" {
+  count = var.eks_addon_version_vpc_cni != null ? 1 : 0
+
+  cluster_name  = aws_eks_cluster.cluster.name
+  addon_name    = "vpc-cni"
+  addon_version = var.eks_addon_version_vpc_cni
+
+  resolve_conflicts_on_create = "OVERWRITE"
+  resolve_conflicts_on_update = "OVERWRITE"
+
+  preserve = true
+
+  tags = {
+    "eks_addon" = "vpc-cni"
+  }
+}
+
+resource "aws_eks_addon" "pod_identity_agent" {
+  count = var.eks_addon_version_pod_identity_agent != null ? 1 : 0
+
+  cluster_name  = aws_eks_cluster.cluster.name
+  addon_name    = "eks-pod-identity-agent"
+  addon_version = var.eks_addon_version_pod_identity_agent
+
+  resolve_conflicts_on_create = "OVERWRITE"
+  resolve_conflicts_on_update = "OVERWRITE"
+
+  preserve = true
+
+  tags = {
+    "eks_addon" = "eks-pod-identity-agent"
+  }
+}
+

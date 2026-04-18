@@ -2,7 +2,7 @@ data "aws_vpc_endpoint_service" "ecr_dkr" {
   service_type = "Interface"
   filter {
     name   = "service-name"
-    values = ["${data.aws_partition.current.reverse_dns_prefix}.${data.aws_region.current.name}.ecr.dkr"]
+    values = ["${data.aws_partition.current.reverse_dns_prefix}.${data.aws_region.current.region}.ecr.dkr"]
   }
 }
 
@@ -10,7 +10,7 @@ data "aws_vpc_endpoint_service" "sts" {
   service_type = "Interface"
   filter {
     name   = "service-name"
-    values = ["${data.aws_partition.current.reverse_dns_prefix}.${data.aws_region.current.name}.sts"]
+    values = ["${data.aws_partition.current.reverse_dns_prefix}.${data.aws_region.current.region}.sts"]
   }
 }
 
@@ -18,7 +18,7 @@ data "aws_vpc_endpoint_service" "s3" {
   service_type = "Interface"
   filter {
     name   = "service-name"
-    values = ["${data.aws_partition.current.reverse_dns_prefix}.${data.aws_region.current.name}.s3"]
+    values = ["${data.aws_partition.current.reverse_dns_prefix}.${data.aws_region.current.region}.s3"]
   }
 }
 
@@ -26,7 +26,7 @@ data "aws_vpc_endpoint_service" "guardduty" {
   service_type = "Interface"
   filter {
     name   = "service-name"
-    values = ["${data.aws_partition.current.reverse_dns_prefix}.${data.aws_region.current.name}.guardduty-data"]
+    values = ["${data.aws_partition.current.reverse_dns_prefix}.${data.aws_region.current.region}.guardduty-data"]
   }
 }
 
@@ -36,7 +36,7 @@ data "aws_iam_policy_document" "eks_vpc_aps_workspaces" {
       "aps:*",
     ]
 
-    resources = ["arn:${data.aws_partition.current.partition}:aps:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:/workspaces*"]
+    resources = ["arn:${data.aws_partition.current.partition}:aps:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:/workspaces*"]
 
     principals {
       type        = "AWS"
@@ -49,7 +49,7 @@ data "aws_vpc_endpoint_service" "aps_workspaces" {
   service_type = "Interface"
   filter {
     name   = "service-name"
-    values = ["${data.aws_partition.current.reverse_dns_prefix}.${data.aws_region.current.name}.aps-workspaces"]
+    values = ["${data.aws_partition.current.reverse_dns_prefix}.${data.aws_region.current.region}.aps-workspaces"]
   }
 }
 

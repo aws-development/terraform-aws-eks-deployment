@@ -19,17 +19,19 @@ terraform {
 
     helm = {
       source  = "hashicorp/helm"
-      version = "~> 2.5.1"
+      version = "~> 2.17"
     }
 
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "2.24.0"
+      version = "~> 2.35"
     }
 
+    # NOTE: gavinbunney/kubectl is no longer maintained; alekc/kubectl is the
+    # community-maintained fork that is compatible with recent Terraform/Kubernetes.
     kubectl = {
-      source  = "gavinbunney/kubectl"
-      version = ">= 1.7.0"
+      source  = "alekc/kubectl"
+      version = "~> 2.1"
     }
 
     wiz = {

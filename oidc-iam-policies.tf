@@ -339,12 +339,12 @@ data "aws_iam_policy_document" "karpenter_controller" {
     ]
 
     resources = [
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}::image/*",
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}::snapshot/*",
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:spot-instances-request/*",
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:security-group/*",
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:subnet/*",
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:launch-template/*"
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}::image/*",
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}::snapshot/*",
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:spot-instances-request/*",
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:security-group/*",
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:subnet/*",
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:launch-template/*"
     ]
   }
 
@@ -357,11 +357,11 @@ data "aws_iam_policy_document" "karpenter_controller" {
     ]
 
     resources = [
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:fleet/*",
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:instance/*",
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:volume/*",
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:network-interface/*",
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:launch-template/*"
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:fleet/*",
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:instance/*",
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:volume/*",
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:network-interface/*",
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:launch-template/*"
     ]
 
     condition {
@@ -390,12 +390,12 @@ data "aws_iam_policy_document" "karpenter_controller" {
     ]
 
     resources = [
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:fleet/*",
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:instance/*",
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:spot-instances-request/*",
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:volume/*",
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:network-interface/*",
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:launch-template/*"
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:fleet/*",
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:instance/*",
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:spot-instances-request/*",
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:volume/*",
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:network-interface/*",
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:launch-template/*"
     ]
 
     condition {
@@ -435,7 +435,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
     ]
 
     resources = [
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:instance/*",
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:instance/*",
     ]
 
     condition {
@@ -475,8 +475,8 @@ data "aws_iam_policy_document" "karpenter_controller" {
     ]
 
     resources = [
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:instance/*",
-      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.name}:*:launch-template/*"
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:instance/*",
+      "arn:${data.aws_partition.current.partition}:ec2:${data.aws_region.current.region}:*:launch-template/*"
     ]
 
     condition {
@@ -521,7 +521,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
       variable = "aws:RequestedRegion"
 
       values = [
-        data.aws_region.current.name
+        data.aws_region.current.region
       ]
     }
   }
@@ -533,7 +533,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
     ]
 
     resources = [
-      "arn:${data.aws_partition.current.partition}:ssm:${data.aws_region.current.name}::parameter/aws/service/*"
+      "arn:${data.aws_partition.current.partition}:ssm:${data.aws_region.current.region}::parameter/aws/service/*"
     ]
   }
 
@@ -602,7 +602,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
       variable = "aws:RequestTag/topology.kubernetes.io/region"
 
       values = [
-        data.aws_region.current.name
+        data.aws_region.current.region
       ]
     }
 
@@ -641,7 +641,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
       variable = "aws:ResourceTag/topology.kubernetes.io/region"
 
       values = [
-        data.aws_region.current.name
+        data.aws_region.current.region
       ]
     }
 
@@ -659,7 +659,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
       variable = "aws:RequestTag/topology.kubernetes.io/region"
 
       values = [
-        data.aws_region.current.name
+        data.aws_region.current.region
       ]
     }
 
@@ -709,7 +709,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
       variable = "aws:ResourceTag/topology.kubernetes.io/region"
 
       values = [
-        data.aws_region.current.name
+        data.aws_region.current.region
       ]
     }
 
@@ -741,7 +741,7 @@ data "aws_iam_policy_document" "karpenter_controller" {
     ]
 
     resources = [
-      "arn:${data.aws_partition.current.partition}:eks:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:cluster/${var.name_prefix}",
+      "arn:${data.aws_partition.current.partition}:eks:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:cluster/${var.name_prefix}",
     ]
   }
 

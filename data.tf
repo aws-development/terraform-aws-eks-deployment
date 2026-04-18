@@ -2,9 +2,10 @@ data "aws_caller_identity" "current" {}
 data "aws_partition" "current" {}
 data "aws_region" "current" {}
 
-# Fetch latest ami_id for specified ${var.eks_version}
+# Fetch latest EKS-optimized AMI for the cluster version (AL2023 - AL2 is EOL
+# for EKS 1.33+)
 data "aws_ssm_parameter" "eks_optimized_ami_id" {
-  name            = "/aws/service/eks/optimized-ami/${var.eks_version}/amazon-linux-2023/x86_64/standard/recommended/image_id"                  
+  name            = "/aws/service/eks/optimized-ami/${var.eks_version}/amazon-linux-2023/x86_64/standard/recommended/image_id"
   with_decryption = true
 }
 
@@ -72,7 +73,7 @@ data "aws_iam_policy_document" "kms_policy_cluster" {
 
     principals {
       type        = "Service"
-      identifiers = ["logs.${data.aws_region.current.name}.${data.aws_partition.current.dns_suffix}"]
+      identifiers = ["logs.${data.aws_region.current.region}.${data.aws_partition.current.dns_suffix}"]
     }
   }
 

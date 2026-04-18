@@ -5,8 +5,10 @@ resource "aws_iam_role" "eks_node_karpenter" {
   name = "${var.name_prefix}-node-karpenter"
 
   assume_role_policy = data.aws_iam_policy_document.eks_node_karpenter_assume_role_policy.json
+}
 
-  managed_policy_arns = [
+locals {
+  eks_node_karpenter_managed_policies = toset([
     "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
     "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
     "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
@@ -14,8 +16,13 @@ resource "aws_iam_role" "eks_node_karpenter" {
     "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
     "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy",
     "arn:aws:iam::aws:policy/CloudWatchApplicationInsightsFullAccess",
-    "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
-  ]
+  ])
+}
+
+resource "aws_iam_role_policy_attachment" "eks_node_karpenter" {
+  for_each   = local.eks_node_karpenter_managed_policies
+  policy_arn = each.value
+  role       = aws_iam_role.eks_node_karpenter.name
 }
 
 resource "aws_iam_instance_profile" "eks_node_karpenter" {

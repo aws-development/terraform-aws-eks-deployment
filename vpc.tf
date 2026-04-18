@@ -1,6 +1,6 @@
 module "vpc_eks" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "5.1.2"
+  version = "~> 5.19"
 
   name = "${var.name_prefix}-vpc"
 
@@ -114,24 +114,18 @@ resource "aws_security_group" "eks_vpc_endpoint" {
   }
 }
 
-resource "aws_security_group_rule" "eks_vpc_endpoint_egress" {
+resource "aws_vpc_security_group_egress_rule" "eks_vpc_endpoint_egress" {
   description       = "Allow all egress."
   security_group_id = aws_security_group.eks_vpc_endpoint.id
-  type              = "egress"
-  protocol          = "-1"
-  from_port         = 0
-  to_port           = 0
-  cidr_blocks       = ["0.0.0.0/0"]
+  ip_protocol       = "-1"
+  cidr_ipv4         = "0.0.0.0/0"
 }
 
-resource "aws_security_group_rule" "eks_vpc_endpoint_self_ingress" {
-  description              = "Self-ingress for all ports."
-  security_group_id        = aws_security_group.eks_vpc_endpoint.id
-  type                     = "ingress"
-  protocol                 = "-1"
-  from_port                = 0
-  to_port                  = 0
-  source_security_group_id = aws_security_group.eks_vpc_endpoint.id
+resource "aws_vpc_security_group_ingress_rule" "eks_vpc_endpoint_self_ingress" {
+  description                  = "Self-ingress for all ports."
+  security_group_id            = aws_security_group.eks_vpc_endpoint.id
+  ip_protocol                  = "-1"
+  referenced_security_group_id = aws_security_group.eks_vpc_endpoint.id
 }
 
 resource "aws_vpc_endpoint" "eks_vpc_guardduty" {

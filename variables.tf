@@ -148,6 +148,18 @@ variable "eks_addon_version_cloudwatch" {
   default     = null
 }
 
+variable "eks_addon_version_vpc_cni" {
+  type        = string
+  description = "Amazon VPC CNI managed EKS addon version."
+  default     = null
+}
+
+variable "eks_addon_version_pod_identity_agent" {
+  type        = string
+  description = "EKS Pod Identity Agent managed addon version."
+  default     = null
+}
+
 #####
 # EKS Default Managed Node Group
 #####

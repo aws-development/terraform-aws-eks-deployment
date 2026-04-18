@@ -50,10 +50,10 @@ resource "aws_launch_template" "cluster" {
   }
 
   user_data = base64encode(templatefile("userdata.tpl", {
-    CLUSTER_NAME   = aws_eks_cluster.cluster.name,
-    B64_CLUSTER_CA = aws_eks_cluster.cluster.certificate_authority[0].data,
-    API_SERVER_URL = aws_eks_cluster.cluster.endpoint,
-    DNS_CLUSTER_IP = local.eks_dns_cluster_ip
+    CLUSTER_NAME      = aws_eks_cluster.cluster.name,
+    B64_CLUSTER_CA    = aws_eks_cluster.cluster.certificate_authority[0].data,
+    API_SERVER_URL    = aws_eks_cluster.cluster.endpoint,
+    SERVICE_IPV4_CIDR = var.eks_service_ipv4_cidr
   }))
 }
 
@@ -111,8 +111,12 @@ resource "aws_iam_role" "eks_node_group" {
   name = "${var.name_prefix}-node-group"
 
   assume_role_policy = data.aws_iam_policy_document.eks_node_group_assume_role_policy.json
+}
 
-  managed_policy_arns = [
+# managed_policy_arns was removed in AWS provider v6. AmazonEC2RoleforSSM is
+# deprecated - use AmazonSSMManagedInstanceCore instead.
+locals {
+  eks_node_group_managed_policies = toset([
     "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
     "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
     "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
@@ -120,8 +124,13 @@ resource "aws_iam_role" "eks_node_group" {
     "arn:aws:iam::aws:policy/AWSXrayWriteOnlyAccess",
     "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy",
     "arn:aws:iam::aws:policy/CloudWatchApplicationInsightsFullAccess",
-    "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
-  ]
+  ])
+}
+
+resource "aws_iam_role_policy_attachment" "eks_node_group" {
+  for_each   = local.eks_node_group_managed_policies
+  policy_arn = each.value
+  role       = aws_iam_role.eks_node_group.name
 }
 
 

@@ -9,6 +9,14 @@ resource "aws_eks_cluster" "cluster" {
 
   enabled_cluster_log_types = var.eks_enabled_log_types
 
+  # EKS 1.35 deprecates the aws-auth ConfigMap. Use API (access entries) with
+  # CONFIG_MAP fallback during migration; flip to "API" once all access entries
+  # are in place.
+  access_config {
+    authentication_mode                         = "API_AND_CONFIG_MAP"
+    bootstrap_cluster_creator_admin_permissions = true
+  }
+
   vpc_config {
     subnet_ids              = module.vpc_eks.private_subnets
     security_group_ids      = var.eks_security_group_ids
@@ -27,6 +35,12 @@ resource "aws_eks_cluster" "cluster" {
   kubernetes_network_config {
     service_ipv4_cidr = var.eks_service_ipv4_cidr
   }
+
+  depends_on = [
+    aws_iam_role_policy_attachment.cluster_AmazonEKSClusterPolicy,
+    aws_iam_role_policy_attachment.cluster_AmazonEKSVPCResourceController,
+    aws_cloudwatch_log_group.cluster,
+  ]
 }
 
 resource "aws_cloudwatch_log_group" "cluster" {
@@ -40,13 +54,18 @@ resource "aws_iam_role" "cluster" {
   name = "${var.name_prefix}-cluster-role"
 
   assume_role_policy = data.aws_iam_policy_document.cluster_role_assume_role_policy.json
+}
 
-  managed_policy_arns = [
-    "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
-    "arn:aws:iam::aws:policy/AmazonEKSServicePolicy",
-    "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
+# managed_policy_arns was removed in AWS provider v6 - use role_policy_attachment.
+# AmazonEKSServicePolicy is deprecated by AWS and no longer required.
+resource "aws_iam_role_policy_attachment" "cluster_AmazonEKSClusterPolicy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+  role       = aws_iam_role.cluster.name
+}
 
-  ]
+resource "aws_iam_role_policy_attachment" "cluster_AmazonEKSVPCResourceController" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
+  role       = aws_iam_role.cluster.name
 }
 /*
 resource "null_resource" "update_kubeconfig" {
