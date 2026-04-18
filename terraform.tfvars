@@ -14,14 +14,14 @@ eks_service_ipv4_cidr = "10.190.0.0/16"
 instance_types = ["t2.medium"]
 
 eks_public_access_cidrs = [
-  "49.36.144.200/32"
+  "24.239.134.30/32"
 ]
 
-eks_version = "1.28"
+eks_version = "1.33"
 
-eks_addon_version_kube_proxy     = "v1.28.2-eksbuild.2"
-eks_addon_version_core_dns       = "v1.10.1-eksbuild.5"
-eks_addon_version_ebs_csi_driver = "v1.25.0-eksbuild.1"
-#eks_addon_version_kubecost      = "v1.103.3-eksbuild.0"
-eks_addon_version_guardduty  = "v1.3.1-eksbuild.1"
-eks_addon_version_cloudwatch = "v1.1.1-eksbuild.1"
+eks_addon_version_kube_proxy            = "v1.35.3-eksbuild.2"
+eks_addon_version_core_dns              = "v1.13.2-eksbuild.4"
+eks_addon_version_ebs_csi_driver        = "v1.58.0-eksbuild.1"
+#eks_addon_version_kubecost             = "v2.5.1-eksbuild.0"
+eks_addon_version_guardduty             = "v1.10.0-eksbuild.1"
+eks_addon_version_cloudwatch            = "v4.0.0-eksbuild.1"
