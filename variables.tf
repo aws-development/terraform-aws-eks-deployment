@@ -283,7 +283,7 @@ variable "alb_controller_settings" {
 
 variable "wiz_image_path" {
   type    = string
-  default = "wiziopublic.azurecr.io/wiz-app/wiz-broker:2.4"
+  default = "wiziopublic.azurecr.io/wiz-app/wiz-broker:3.0"
 }
 
 
@@ -357,7 +357,7 @@ variable "wiz_broker_client_secret" {
 
 variable "wiz_install_runtime_sensor" {
   type        = bool
-  default     = false
+  default     = true
   description = "Whether to Wiz runtime sensor helm chart or not ?"
 }
 
@@ -383,7 +383,7 @@ variable "wiz_runtime_sensor_helm_chart_repo" {
 
 variable "wiz_runtime_sensor_helm_chart_version" {
   type        = string
-  default     = "1.0.3011"
+  default     = ">=1.0.10340"
   description = "Wiz runtime sensor helm chart version"
 }
 
@@ -420,7 +420,7 @@ variable "wiz_runtime_sensor_sa_secret_key" {
 
 variable "wiz_install_k8_admission_controller" {
   type        = bool
-  default     = false
+  default     = true
   description = "Wheter to install Wiz admission controller helm chart or not ?"
 }
 
@@ -446,7 +446,7 @@ variable "wiz_k8_admission_controller_helm_chart_repo" {
 
 variable "wiz_k8_admission_controller_helm_chart_version" {
   type        = string
-  default     = "3.4.5"
+  default     = "3.12.10"
   description = "Wiz admission controller helm chart version"
 }
 
