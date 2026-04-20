@@ -383,7 +383,7 @@ variable "wiz_runtime_sensor_helm_chart_repo" {
 
 variable "wiz_runtime_sensor_helm_chart_version" {
   type        = string
-  default     = ">=1.0.10340"
+  default     = "1.0.10342"
   description = "Wiz runtime sensor helm chart version"
 }
 
