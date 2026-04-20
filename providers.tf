@@ -31,7 +31,7 @@ terraform {
     # community-maintained fork that is compatible with recent Terraform/Kubernetes.
     kubectl = {
       source  = "alekc/kubectl"
-      version = "~> 2.1"
+      version = "2.2.0"
     }
 
     wiz = {
