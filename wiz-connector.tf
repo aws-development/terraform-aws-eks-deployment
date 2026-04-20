@@ -5,7 +5,7 @@ resource "kubernetes_namespace" "wiz_namespace" {
     name = var.wiz_namespace
   }
 }
-
+*/
 resource "kubernetes_cluster_role" "wiz_cluster_reader" {
   metadata {
     name = "wiz-cluster-reader"
@@ -172,4 +172,4 @@ resource "kubernetes_deployment" "wiz_broker" {
     }
   }
 }
-*/
+
