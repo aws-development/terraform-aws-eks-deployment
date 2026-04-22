@@ -357,7 +357,7 @@ variable "wiz_broker_client_secret" {
 
 variable "wiz_install_runtime_sensor" {
   type        = bool
-  default     = true
+  default     = false
   description = "Whether to Wiz runtime sensor helm chart or not ?"
 }
 
@@ -420,7 +420,7 @@ variable "wiz_runtime_sensor_sa_secret_key" {
 
 variable "wiz_install_k8_admission_controller" {
   type        = bool
-  default     = true
+  default     = false
   description = "Wheter to install Wiz admission controller helm chart or not ?"
 }
 
